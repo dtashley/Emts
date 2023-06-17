@@ -1,0 +1,26 @@
+\chapter{\cspszerotitle{}}
+
+\label{csps0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Purchase and Setup of Code Signing Certificate}
+%Section tag: PSC0
+\label{csps0:spsc0}
+
+Purchased from Certum.  All went according to published procedures,
+except installation of certificate per instruction.
+
+My issue is solved.  Please disregard my technical support request (although if there is
+anything additional I should read, I'd be grateful for links).
+
+a)I ran the command shell as administrator (that seems to make a difference).
+
+b)I used the ``/debug'' option with SIGNTOOL and determined that it is only looking in
+the Personal/Certificates area of the stored certificates.  The proCertum application
+installs the certificate in the Other People/Certificates area of the stored
+certificates, which is apparently not checked by SIGNTOOL. 
+So I had to import the certificate into the right location.
+
+%End of file c_psc0.tex
