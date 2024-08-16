@@ -9,18 +9,505 @@
 %Section tag: PSC0
 \label{csps0:spsc0}
 
-Purchased from Certum.  All went according to published procedures,
-except installation of certificate per instruction.
+All of the lines are \LaTeX{} comments until I get it formatted and
+ready for compilation.
 
-My issue is solved.  Please disregard my technical support request (although if there is
-anything additional I should read, I'd be grateful for links).
+% Purchased from Certum.  All went according to published procedures,
+% except installation of certificate per instruction.
+% 
+% My issue is solved.  Please disregard my technical support request (although if there is
+% anything additional I should read, I'd be grateful for links).
+% 
+% a)I ran the command shell as administrator (that seems to make a difference).
+% 
+% b)I used the ``/debug'' option with SIGNTOOL and determined that it is only looking in
+% the Personal/Certificates area of the stored certificates.  The proCertum application
+% installs the certificate in the Other People/Certificates area of the stored
+% certificates, which is apparently not checked by SIGNTOOL. 
+% So I had to import the certificate into the right location.
+% 
+% Step #1
+% -------
+% After installing certificate from the proCertum Card application, made sure it was present in both Personal/Certificates
+% and Other People/Certificates folders.  Copy and Paste within certmgr does that.
+%
+% Step #2
+% -------
+% Discovered that there is a "certlm" application as well as a "certmgr" application.  Believe I may have tried putting
+% certificates there as well, but I'm not sure it made a difference.  Local machine versus local user.
+%
+% Step #3
+% -------
+% Discovered that the "/debug" option has to be placed immediately after "sign".
+%
+% "c:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x64\signtool.exe" sign /n "David Ashley" /t http://time.certum.pl/ /fd sha256 /v emts_ifsfscan.exe /debug
+%
+% versus
+%
+% "c:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x64\signtool.exe" sign /debug /n "David Ashley" /t http://time.certum.pl/ /fd sha256 /v emts_ifsfscan.exe
+%
+% Step #4
+% -------
+% Based on various Internet postings, tried this command:
+%
+% certutil -repairstore
+%
+% Seemed to have no effect.
+%
+% Step #5
+% -------
+% Upgraded to the latest version of the windows kit, 26100.  That changed the command line slightly.
+%
+% Step #6
+% -------
+% Determined that the problem was with the "Private Key filter".
 
-a)I ran the command shell as administrator (that seems to make a difference).
-
-b)I used the ``/debug'' option with SIGNTOOL and determined that it is only looking in
-the Personal/Certificates area of the stored certificates.  The proCertum application
-installs the certificate in the Other People/Certificates area of the stored
-certificates, which is apparently not checked by SIGNTOOL. 
-So I had to import the certificate into the right location.
-
+% C:\Users\dashl\Documents>"c:\Program Files (x86)\Windows Kits\10\bin\10.0.26100.0\x64\signtool.exe" sign /debug /n "David Ashley" /t http://time.certum.pl/ /fd sha256 /v emts_ifsfscan.exe
+% 
+% The following certificates were considered:
+%     Issued to: David Ashley
+%     Issued by: Certum Code Signing 2021 CA
+%     Expires:   Sat Aug 16 01:46:38 2025
+%     SHA1 hash: D5F54EEBC165FE82202C2DB9B633D4885B12E5C5
+% 
+%     Issued to: c1e26399-5bee-45e3-9c33-e51655695ace
+%     Issued by: c1e26399-5bee-45e3-9c33-e51655695ace
+%     Expires:   Thu Mar 20 11:14:56 2025
+%     SHA1 hash: 4DECD3C81B96AEB6C226C5126E4DE999506A953D
+% 
+%     Issued to: 1418c40a-aa3e-4259-a258-2d929d1b383b
+%     Issued by: 1418c40a-aa3e-4259-a258-2d929d1b383b
+%     Expires:   Thu Jan 16 10:55:18 2025
+%     SHA1 hash: 3B3A4254A5CDAE9F4A975C272259064854624C9F
+% 
+%     Issued to: a3665860-c4e0-4b3e-adc5-ffe3bfd8721a
+%     Issued by: MS-Organization-Access
+%     Expires:   Mon Jan 07 18:55:40 2030
+%     SHA1 hash: 17784374B18C0EB9EB0346442EC21B4984D6225A
+% 
+% After EKU filter, 3 certs were left.
+% After expiry filter, 3 certs were left.
+% After Subject Name filter, 1 certs were left.
+% After Private Key filter, 0 certs were left.
+% SignTool Error: No certificates were found that met all the given criteria.
+%
+% Searched the Internet.
+%
+% Step #7
+% -------
+% Got information from certmgr.
+% 
+% C:\Users\dashl\Documents>certutil -scinfo
+% The Microsoft Smart Card Resource Manager is running.
+% Current reader/card status:
+% Readers: 1
+%   0: ACS ACR39U ICC Reader 0
+% --- Reader: ACS ACR39U ICC Reader 0
+% --- Status: SCARD_STATE_PRESENT | SCARD_STATE_UNPOWERED
+% --- Status: The card is available for use.
+% ---   Card:  cryptoCertum3.6
+% ---    ATR:
+%         3b 7f 96 00 00 80 31 80  58 43 65 72 74 75 6d 30   ;.....1.XCertum0
+%         31 82 90 00                                        1...
+% 
+% 
+% =======================================================
+% Analyzing card in reader: ACS ACR39U ICC Reader 0
+% 
+% --------------===========================--------------
+% ================ Certificate 0 ================
+% --- Reader: ACS ACR39U ICC Reader 0
+% ---   Card:  cryptoCertum3.6
+% Provider = Microsoft Base Smart Card Crypto Provider
+% Key Container = CFC2BAB12D160BF78F203DDC1E78D95A7E7D644
+% 
+% Serial Number: 65c7bf928db4fff3558e09aa30e8c49e
+% Issuer: CN=Certum Code Signing 2021 CA, O=Asseco Data Systems S.A., C=PL
+%  NotBefore: 8/16/2024 1:46 AM
+%  NotAfter: 8/16/2025 1:46 AM
+% Subject: CN=David Ashley, O=David Ashley, L=Allen Park, S=Michigan, C=US
+% Non-root Certificate
+% Cert Hash(sha1): d5f54eebc165fe82202c2db9b633d4885b12e5c5
+% 
+% Performing AT_SIGNATURE public key matching test...
+% Public key matching test succeeded
+%   Key Container = CFC2BAB12D160BF78F203DDC1E78D95A7E7D644
+%   Provider = Microsoft Base Smart Card Crypto Provider
+%   ProviderType = 1
+%   Flags = 1
+%     0x1 (1)
+%   KeySpec = 2 -- AT_SIGNATURE
+% Private key verifies
+% 
+% Performing cert chain verification...
+% Chain validates
+% Smart Card Logon: Chain on smart card is invalid
+% dwFlags = CA_VERIFY_FLAGS_CONSOLE_TRACE (0x20000000)
+% dwFlags = CA_VERIFY_FLAGS_DUMP_CHAIN (0x40000000)
+% ChainFlags = CERT_CHAIN_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT (0x40000000)
+% HCCE_LOCAL_MACHINE
+% CERT_CHAIN_POLICY_BASE
+% -------- CERT_CHAIN_CONTEXT --------
+% ChainContext.dwInfoStatus = CERT_TRUST_HAS_PREFERRED_ISSUER (0x100)
+% ChainContext.dwRevocationFreshnessTime: 5 Days, 18 Hours, 6 Minutes, 26 Seconds
+% 
+% SimpleChain.dwInfoStatus = CERT_TRUST_HAS_PREFERRED_ISSUER (0x100)
+% SimpleChain.dwRevocationFreshnessTime: 5 Days, 18 Hours, 6 Minutes, 26 Seconds
+% 
+% CertContext[0][0]: dwInfoStatus=102 dwErrorStatus=0
+%   Issuer: CN=Certum Code Signing 2021 CA, O=Asseco Data Systems S.A., C=PL
+%   NotBefore: 8/16/2024 1:46 AM
+%   NotAfter: 8/16/2025 1:46 AM
+%   Subject: CN=David Ashley, O=David Ashley, L=Allen Park, S=Michigan, C=US
+%   Serial: 65c7bf928db4fff3558e09aa30e8c49e
+%   Cert: d5f54eebc165fe82202c2db9b633d4885b12e5c5
+%   Element.dwInfoStatus = CERT_TRUST_HAS_KEY_MATCH_ISSUER (0x2)
+%   Element.dwInfoStatus = CERT_TRUST_HAS_PREFERRED_ISSUER (0x100)
+%     CRL (null):
+%     Issuer: CN=Certum Code Signing 2021 CA Validation Service, O=Asseco Data Systems S.A., C=PL
+%     ThisUpdate: 8/16/2024 11:04 AM
+%     NextUpdate: 8/23/2024 11:04 AM
+%     CRL: 2ece42454c488182ca9be31a1e43bc455028c0ee
+%   Issuance[0] = 2.23.140.1.4.1
+%   Issuance[1] = 1.2.616.1.113527.2.5.1.4
+%   Application[0] = 1.3.6.1.5.5.7.3.3 Code Signing
+% 
+% CertContext[0][1]: dwInfoStatus=102 dwErrorStatus=0
+%   Issuer: CN=Certum Trusted Network CA 2, OU=Certum Certification Authority, O=Unizeto Technologies S.A., C=PL
+%   NotBefore: 5/19/2021 1:32 AM
+%   NotAfter: 5/18/2036 1:32 AM
+%   Subject: CN=Certum Code Signing 2021 CA, O=Asseco Data Systems S.A., C=PL
+%   Serial: 99a3800a26553b65abdc6e84a6b3ea39
+%   Cert: 8d57e2b4008bbe461470a69f3492bc5ae362a7a9
+%   Element.dwInfoStatus = CERT_TRUST_HAS_KEY_MATCH_ISSUER (0x2)
+%   Element.dwInfoStatus = CERT_TRUST_HAS_PREFERRED_ISSUER (0x100)
+%     CRL (null):
+%     Issuer: CN=Certum Trusted Network CA 2 Validation Service, O=Asseco Data Systems S.A., C=PL
+%     ThisUpdate: 8/10/2024 6:10 PM
+%     NextUpdate: 8/17/2024 6:10 PM
+%     CRL: 4766a90c4ef022d93996acfa27318c548a4595f8
+%   Application[0] = 1.3.6.1.5.5.7.3.3 Code Signing
+% 
+% CertContext[0][2]: dwInfoStatus=10c dwErrorStatus=0
+%   Issuer: CN=Certum Trusted Network CA 2, OU=Certum Certification Authority, O=Unizeto Technologies S.A., C=PL
+%   NotBefore: 10/6/2011 4:39 AM
+%   NotAfter: 10/6/2046 4:39 AM
+%   Subject: CN=Certum Trusted Network CA 2, OU=Certum Certification Authority, O=Unizeto Technologies S.A., C=PL
+%   Serial: 21d6d04a4f250fc93237fcaa5e128de9
+%   Cert: d3dd483e2bbf4c05e8af10f5fa7626cfd3dc3092
+%   Element.dwInfoStatus = CERT_TRUST_HAS_NAME_MATCH_ISSUER (0x4)
+%   Element.dwInfoStatus = CERT_TRUST_IS_SELF_SIGNED (0x8)
+%   Element.dwInfoStatus = CERT_TRUST_HAS_PREFERRED_ISSUER (0x100)
+%   Application[0] = 1.3.6.1.5.5.7.3.2 Client Authentication
+%   Application[1] = 1.3.6.1.5.5.7.3.3 Code Signing
+%   Application[2] = 1.3.6.1.5.5.7.3.4 Secure Email
+%   Application[3] = 1.3.6.1.5.5.7.3.1 Server Authentication
+%   EV[0] = 1.2.616.1.113527.2.5.1.1
+%   EV[1] = 1.2.616.1.113527.2.5.1.7
+%   EV[2] = 2.23.140.1.3
+% 
+% Exclude leaf cert:
+%   Chain: aed7917909ae63983d4878bef16ee07368b32bc0
+% Full chain:
+%   Chain: f175a0509a47c4d296f311acb97789b08ef23f1b
+% ------------------------------------
+% Verified Issuance Policies:
+%     2.23.140.1.4.1
+%     1.2.616.1.113527.2.5.1.4
+% Verified Application Policies:
+%     1.3.6.1.5.5.7.3.3 Code Signing
+% Displayed AT_SIGNATURE cert for reader: ACS ACR39U ICC Reader 0
+% Serial Number: 65c7bf928db4fff3558e09aa30e8c49e
+% Issuer: CN=Certum Code Signing 2021 CA, O=Asseco Data Systems S.A., C=PL
+%  NotBefore: 8/16/2024 1:46 AM
+%  NotAfter: 8/16/2025 1:46 AM
+% Subject: CN=David Ashley, O=David Ashley, L=Allen Park, S=Michigan, C=US
+% Non-root Certificate
+% Cert Hash(sha1): d5f54eebc165fe82202c2db9b633d4885b12e5c5
+% 
+% Performing AT_KEYEXCHANGE public key matching test...
+% Public key matching test succeeded
+%   Key Container = CFC2BAB12D160BF78F203DDC1E78D95A7E7D644
+%   Provider = Microsoft Base Smart Card Crypto Provider
+%   ProviderType = 1
+%   Flags = 1
+%     0x1 (1)
+%   KeySpec = 1 -- AT_KEYEXCHANGE
+% Private key verifies
+% 
+% Performing cert chain verification...
+% Chain validates
+% Smart Card Logon: Chain on smart card is invalid
+% dwFlags = CA_VERIFY_FLAGS_CONSOLE_TRACE (0x20000000)
+% dwFlags = CA_VERIFY_FLAGS_DUMP_CHAIN (0x40000000)
+% ChainFlags = CERT_CHAIN_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT (0x40000000)
+% HCCE_LOCAL_MACHINE
+% CERT_CHAIN_POLICY_BASE
+% -------- CERT_CHAIN_CONTEXT --------
+% ChainContext.dwInfoStatus = CERT_TRUST_HAS_PREFERRED_ISSUER (0x100)
+% ChainContext.dwRevocationFreshnessTime: 5 Days, 18 Hours, 6 Minutes, 28 Seconds
+% 
+% SimpleChain.dwInfoStatus = CERT_TRUST_HAS_PREFERRED_ISSUER (0x100)
+% SimpleChain.dwRevocationFreshnessTime: 5 Days, 18 Hours, 6 Minutes, 28 Seconds
+% 
+% CertContext[0][0]: dwInfoStatus=102 dwErrorStatus=0
+%   Issuer: CN=Certum Code Signing 2021 CA, O=Asseco Data Systems S.A., C=PL
+%   NotBefore: 8/16/2024 1:46 AM
+%   NotAfter: 8/16/2025 1:46 AM
+%   Subject: CN=David Ashley, O=David Ashley, L=Allen Park, S=Michigan, C=US
+%   Serial: 65c7bf928db4fff3558e09aa30e8c49e
+%   Cert: d5f54eebc165fe82202c2db9b633d4885b12e5c5
+%   Element.dwInfoStatus = CERT_TRUST_HAS_KEY_MATCH_ISSUER (0x2)
+%   Element.dwInfoStatus = CERT_TRUST_HAS_PREFERRED_ISSUER (0x100)
+%     CRL (null):
+%     Issuer: CN=Certum Code Signing 2021 CA Validation Service, O=Asseco Data Systems S.A., C=PL
+%     ThisUpdate: 8/16/2024 11:04 AM
+%     NextUpdate: 8/23/2024 11:04 AM
+%     CRL: 2ece42454c488182ca9be31a1e43bc455028c0ee
+%   Issuance[0] = 2.23.140.1.4.1
+%   Issuance[1] = 1.2.616.1.113527.2.5.1.4
+%   Application[0] = 1.3.6.1.5.5.7.3.3 Code Signing
+% 
+% CertContext[0][1]: dwInfoStatus=102 dwErrorStatus=0
+%   Issuer: CN=Certum Trusted Network CA 2, OU=Certum Certification Authority, O=Unizeto Technologies S.A., C=PL
+%   NotBefore: 5/19/2021 1:32 AM
+%   NotAfter: 5/18/2036 1:32 AM
+%   Subject: CN=Certum Code Signing 2021 CA, O=Asseco Data Systems S.A., C=PL
+%   Serial: 99a3800a26553b65abdc6e84a6b3ea39
+%   Cert: 8d57e2b4008bbe461470a69f3492bc5ae362a7a9
+%   Element.dwInfoStatus = CERT_TRUST_HAS_KEY_MATCH_ISSUER (0x2)
+%   Element.dwInfoStatus = CERT_TRUST_HAS_PREFERRED_ISSUER (0x100)
+%     CRL (null):
+%     Issuer: CN=Certum Trusted Network CA 2 Validation Service, O=Asseco Data Systems S.A., C=PL
+%     ThisUpdate: 8/10/2024 6:10 PM
+%     NextUpdate: 8/17/2024 6:10 PM
+%     CRL: 4766a90c4ef022d93996acfa27318c548a4595f8
+%   Application[0] = 1.3.6.1.5.5.7.3.3 Code Signing
+% 
+% CertContext[0][2]: dwInfoStatus=10c dwErrorStatus=0
+%   Issuer: CN=Certum Trusted Network CA 2, OU=Certum Certification Authority, O=Unizeto Technologies S.A., C=PL
+%   NotBefore: 10/6/2011 4:39 AM
+%   NotAfter: 10/6/2046 4:39 AM
+%   Subject: CN=Certum Trusted Network CA 2, OU=Certum Certification Authority, O=Unizeto Technologies S.A., C=PL
+%   Serial: 21d6d04a4f250fc93237fcaa5e128de9
+%   Cert: d3dd483e2bbf4c05e8af10f5fa7626cfd3dc3092
+%   Element.dwInfoStatus = CERT_TRUST_HAS_NAME_MATCH_ISSUER (0x4)
+%   Element.dwInfoStatus = CERT_TRUST_IS_SELF_SIGNED (0x8)
+%   Element.dwInfoStatus = CERT_TRUST_HAS_PREFERRED_ISSUER (0x100)
+%   Application[0] = 1.3.6.1.5.5.7.3.2 Client Authentication
+%   Application[1] = 1.3.6.1.5.5.7.3.3 Code Signing
+%   Application[2] = 1.3.6.1.5.5.7.3.4 Secure Email
+%   Application[3] = 1.3.6.1.5.5.7.3.1 Server Authentication
+%   EV[0] = 1.2.616.1.113527.2.5.1.1
+%   EV[1] = 1.2.616.1.113527.2.5.1.7
+%   EV[2] = 2.23.140.1.3
+% 
+% Exclude leaf cert:
+%   Chain: aed7917909ae63983d4878bef16ee07368b32bc0
+% Full chain:
+%   Chain: f175a0509a47c4d296f311acb97789b08ef23f1b
+% ------------------------------------
+% Verified Issuance Policies:
+%     2.23.140.1.4.1
+%     1.2.616.1.113527.2.5.1.4
+% Verified Application Policies:
+%     1.3.6.1.5.5.7.3.3 Code Signing
+% Displayed AT_KEYEXCHANGE cert for reader: ACS ACR39U ICC Reader 0
+% 
+% --------------===========================--------------
+% ================ Certificate 0 ================
+% --- Reader: ACS ACR39U ICC Reader 0
+% ---   Card:  cryptoCertum3.6
+% Provider = Microsoft Smart Card Key Storage Provider
+% Key Container = CFC2BAB12D160BF78F203DDC1E78D95A7E7D644
+% 
+% Cannot open the  key for reader: ACS ACR39U ICC Reader 0
+% 
+% --------------===========================--------------
+% ================ Certificate 1 ================
+% --- Reader: ACS ACR39U ICC Reader 0
+% ---   Card:  cryptoCertum3.6
+% Provider = Microsoft Smart Card Key Storage Provider
+% Key Container = CFC2BAB12D160BF78F203DDC1E78D95A7E7D644
+% 
+% Cannot open the  key for reader: ACS ACR39U ICC Reader 0
+% 
+% --------------===========================--------------
+% 
+% Done.
+% CertUtil: -SCInfo command completed successfully.
+%
+% Step #8
+% -------
+% Got information about the cryptographic card, decided to try the /kc option.
+%
+% C:\Users\dashl\Documents>"c:\Program Files (x86)\Windows Kits\10\bin\10.0.26100.0\x64\signtool.exe" sign /debug /kc CFC2BAB12D160BF78F203DDC1E78D95A7E7D644 /n "David Ashley" /t http://time.certum.pl/ /fd sha256 /v emts_ifsfscan.exe
+% SignTool Error: The /k option requires the /csp option.
+% 
+% Step #9
+% --------
+% Got more information about the cryptographic card, decided to try the /csp option.
+%
+% C:\Users\dashl\Documents>
+% C:\Users\dashl\Documents>"c:\Program Files (x86)\Windows Kits\10\bin\10.0.26100.0\x64\signtool.exe" sign /debug /kc CFC2BAB12D160BF78F203DDC1E78D95A7E7D644 /csp "Microsoft Base Smart Card Crypto Provider" /n "David Ashley" /t http://time.certum.pl/ /fd sha256 /v emts_ifsfscan.exe
+% 
+% The following certificates were considered:
+%     Issued to: David Ashley
+%     Issued by: Certum Code Signing 2021 CA
+%     Expires:   Sat Aug 16 01:46:38 2025
+%     SHA1 hash: D5F54EEBC165FE82202C2DB9B633D4885B12E5C5
+% 
+%     Issued to: c1e26399-5bee-45e3-9c33-e51655695ace
+%     Issued by: c1e26399-5bee-45e3-9c33-e51655695ace
+%     Expires:   Thu Mar 20 11:14:56 2025
+%     SHA1 hash: 4DECD3C81B96AEB6C226C5126E4DE999506A953D
+% 
+%     Issued to: 1418c40a-aa3e-4259-a258-2d929d1b383b
+%     Issued by: 1418c40a-aa3e-4259-a258-2d929d1b383b
+%     Expires:   Thu Jan 16 10:55:18 2025
+%     SHA1 hash: 3B3A4254A5CDAE9F4A975C272259064854624C9F
+% 
+%     Issued to: a3665860-c4e0-4b3e-adc5-ffe3bfd8721a
+%     Issued by: MS-Organization-Access
+%     Expires:   Mon Jan 07 18:55:40 2030
+%     SHA1 hash: 17784374B18C0EB9EB0346442EC21B4984D6225A
+% 
+% After EKU filter, 3 certs were left.
+% After expiry filter, 3 certs were left.
+% After Subject Name filter, 1 certs were left.
+% The following certificate was selected:
+%     Issued to: David Ashley
+%     Issued by: Certum Code Signing 2021 CA
+%     Expires:   Sat Aug 16 01:46:38 2025
+%     SHA1 hash: D5F54EEBC165FE82202C2DB9B633D4885B12E5C5
+% 
+% SignTool Error: An unexpected internal error has occurred.
+% Error information: "Could not associate private key with certificate." (-2147024891/0x80070005)
+% 
+% Step #10
+% --------
+% Decided to try the -repairstore option.
+%
+% C:\Users\dashl\Documents>certutil -repairstore
+% Expected at least 2 args, received 0
+% CertUtil: Missing argument
+% 
+% Usage:
+%   CertUtil [Options] -repairstore CertificateStoreName CertIdList [PropertyInfFile | SDDLSecurityDescriptor]
+%   Repair key association or update certificate properties or key security descriptor
+%     CertificateStoreName -- Certificate store name.  See -store.
+%     CertIdList -- comma separated list of Certificate or CRL match tokens.
+%             See -store's CertId description.
+%     PropertyInfFile -- INF file containing external properties:
+%             [Properties]
+%             19 = Empty ; Add archived property, OR:
+%             19 =       ; Remove archived property
+% 
+%             11 = "{text}Friendly Name" ; Add friendly name property
+% 
+%             127 = "{hex}" ; Add custom hexadecimal property
+%               _continue_ = "00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f"
+%               _continue_ = "10 11 12 13 14 15 16 17 18 19 1a 1b 1c 1d 1e 1f"
+% 
+%             2 = "{text}" ; Add Key Provider Information property
+%               _continue_ = "Container=Container Name&"
+%               _continue_ = "Provider=Microsoft Strong Cryptographic Provider&"
+%               _continue_ = "ProviderType=1&"
+%               _continue_ = "Flags=0&"
+%               _continue_ = "KeySpec=2"
+% 
+%             9 = "{text}" ; Add Enhanced Key Usage property
+%               _continue_ = "1.3.6.1.5.5.7.3.2,"
+%               _continue_ = "1.3.6.1.5.5.7.3.1,"
+% 
+% Options:
+%   -f                -- Force overwrite
+%   -Enterprise       -- (-ent) Use local machine Enterprise registry certificate store
+%   -user             -- Use HKEY_CURRENT_USER keys or certificate store
+%   -GroupPolicy      -- (-gp) Use Group Policy certificate store
+%   -Unicode          -- Write redirected output in Unicode
+%   -gmt              -- Display times as GMT
+%   -seconds          -- Display times with seconds and milliseconds
+%   -Silent           -- (-q) Use silent flag to acquire crypt context
+%   -split            -- Split embedded ASN.1 elements, and save to files
+%   -v                -- Verbose operation
+%   -privatekey       -- Display password and private key data
+%   -pin PIN                  -- Smart Card PIN
+%   -csp Provider             -- Provider
+%         KSP -- "Microsoft Software Key Storage Provider"
+%         TPM -- "Microsoft Platform Crypto Provider"
+%         NGC -- "Microsoft Passport Key Storage Provider"
+%         SC -- "Microsoft Smart Card Key Storage Provider"
+%   -sid WELL_KNOWN_SID_TYPE  -- Numeric SID
+%             22 -- Local System
+%             23 -- Local Service
+%             24 -- Network Service
+% 
+% CertUtil -?              -- Display a verb list (command list)
+% CertUtil -repairstore -? -- Display help text for the "repairstore" verb
+% CertUtil -v -?           -- Display all help text for all verbs
+% 
+%
+% Step #11
+% --------
+% Installing the sub-certificates as trusted root certification authorities in the certificate store cured my problems.  I downloaded
+% these certificates (3 of them) listed as sub-certificates with my certificate on the Certum website.  I used the second
+% export form available, and these imported no problem.
+%
+% It ends up that the "Could not associate private key with certificate." message from signtool was quite misleading.
+%
+% Step #12
+% --------
+% For reasons I don't understand, the computer now claimed that 26100 was an imcompatible version.
+%
+% Used the previous version and the form of the command recommended in the Certum instructions, and it worked
+% fine.
+%
+% C:\Users\dashl\Documents>"c:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x64\signtool.exe" sign /debug /n "David Ashley" /t http://time.certum.pl/ /fd sha256 /v emts_ifsfscan.exe
+% 
+% The following certificates were considered:
+%     Issued to: David Ashley
+%     Issued by: Certum Code Signing 2021 CA
+%     Expires:   Sat Aug 16 01:46:38 2025
+%     SHA1 hash: D5F54EEBC165FE82202C2DB9B633D4885B12E5C5
+% 
+%     Issued to: c1e26399-5bee-45e3-9c33-e51655695ace
+%     Issued by: c1e26399-5bee-45e3-9c33-e51655695ace
+%     Expires:   Thu Mar 20 11:14:56 2025
+%     SHA1 hash: 4DECD3C81B96AEB6C226C5126E4DE999506A953D
+% 
+%     Issued to: 1418c40a-aa3e-4259-a258-2d929d1b383b
+%     Issued by: 1418c40a-aa3e-4259-a258-2d929d1b383b
+%     Expires:   Thu Jan 16 10:55:18 2025
+%     SHA1 hash: 3B3A4254A5CDAE9F4A975C272259064854624C9F
+% 
+%     Issued to: a3665860-c4e0-4b3e-adc5-ffe3bfd8721a
+%     Issued by: MS-Organization-Access
+%     Expires:   Mon Jan 07 18:55:40 2030
+%     SHA1 hash: 17784374B18C0EB9EB0346442EC21B4984D6225A
+% 
+% After EKU filter, 3 certs were left.
+% After expiry filter, 3 certs were left.
+% After Subject Name filter, 1 certs were left.
+% After Private Key filter, 1 certs were left.
+% The following certificate was selected:
+%     Issued to: David Ashley
+%     Issued by: Certum Code Signing 2021 CA
+%     Expires:   Sat Aug 16 01:46:38 2025
+%     SHA1 hash: D5F54EEBC165FE82202C2DB9B633D4885B12E5C5
+% 
+% Done Adding Additional Store
+% Successfully signed: emts_ifsfscan.exe
+% 
+% Number of files successfully Signed: 1
+% Number of warnings: 0
+% Number of errors: 0
+%
+% Step #13
+% --------
+% Determined that my e-mail address was not in the "properties" of the signature in the .EXE, so have
+% written Certum technical support on 8/16 to see if I need to have the certificate reissued, or how
+% I would get my e-mail address in there.
+% 
 %End of file c_psc0.tex
+
