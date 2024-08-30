@@ -4,30 +4,30 @@ This manual describes \emph{\productname{}}, a tool integration
 framework designed for embedded software development work.
 
 \emph{\productname{}} provides the ability to package C/C++ tools
-in several distinct forms, using the same source code:
+in several distinct forms, using the same underlying source code:
 
 \begin{itemize}
       \item As commands available from an interactive shell, provided
             by the tool.
-      \item As functions in a scripting language, combined 
-            with built-in \emph{\productname{}} functionality and
-            possibly other tools.  (These functions can be used
-            both from a script and interactively.)
+      \item As a console-mode program (no scripting or graphical functionality).
+      \item As functions in a custom scripting language interpreter.
+            (The scripting language is tentatively
+            named \emph{\scriptinglanguagenamemc{}}).
       \item As functionality utilized from a \emph{Windows} GUI interface.
-      \item As a console-mode program (no scripting or graphical functionality),
-            containing a tool's functionality combined with the functionality of
-            other tools.
-      \item As a console-mode program (no scripting or graphical functionality)
-            containing only an individual tool's
-            functionality.
 \end{itemize}
 
 Although \emph{\productname{}} can be built for both \emph{Windows} and
 \emph{Unix}, graphical capability is available only for \emph{Windows}.
+
+\emph{\productname{}} is best described as a tool integration framework
+because it is possible to integrate custom tools (most commonly,
+proprietary corporate tools) into the framework and create proprietary or
+custom tools that are a mixture of \emph{\productname{}} functionality
+and proprietary or custom functionality.
 
 My e-mail address is \emph{dashley@gmail.com}.\@ Please feel
 to contact me.
 \\\\
 \noindent\hspace*{2.5in}Dave Ashley\\
 \noindent\hspace*{2.5in}Allen Park, Michigan, USA\\
-\noindent\hspace*{2.5in}August, 2023
+\noindent\hspace*{2.5in}August, 2024

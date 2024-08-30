@@ -7,7 +7,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Overview of This Manual}
-%Section tag: INT0
 \label{cint2:siov0}
 
 This manual describes \emph{\productname{}}, a customizable tool integration
@@ -32,6 +31,40 @@ framework.
                 \item Customized help and contact information.
           \end{itemize}
 \end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Overview of \productname{}}
+\label{cint2:siov1}
+
+\emph{\productname{}} contains a core, called the \emph{core}
+or the \emph{\productname{} core},
+that is not designed to be divided.  Any proprietary or custom tool built
+using \emph{\productname{}} would contain the entire core, combined
+with additional proprietary or custom content.
+
+Outside of the core, the fundamental building block of \emph{\productname{}}
+is the \emph{\productname{} module}, or \emph{module}.  A module is the
+smallest unit that can be included or not included in a build
+of \emph{\productname{}}.  A module is atomic and not designed to
+divided.  A \emph{tool} generally corresponds to closely related functionality;
+cryptographic hashing functions, for example.
+
+A module may contain one or more \emph{tools}.  A tool generally
+corresponds to narrow functionality; the SHA256 hash, for example.
+
+A tool may contain one or more \emph{commands}.  A command
+generally has very narrow scope to support a tool.  For example,
+an SHA256 tool might contain two commands, one to calculate the
+hash of a string, and another to calculate the hash of a file.
+
+The notions of module, tool, and command are subjective enough
+that no guarantees can be made about how they might be
+defined.  The only guarantee that can be made is that a
+module corresponds to an integral number of panels
+in the graphical tool.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
