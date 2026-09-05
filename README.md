@@ -1,4 +1,60 @@
-﻿# Emts
+﻿# EMTS
+
+- [Overview](#overview)
+- [License](*license)
+  - [The Unlicense](#theunlicense)
+  - [License Clarifications](#licenseclarifications)
+
+## Overview
+
+*EMTS* (*Em*bedded System *T*ool*s*et Base)
+is a set of software source files (and related files and
+information) used to assist in the construction
+of PC and server tools useful for embedded system
+engineering.
+
+The tools that can be produced are:
+
+* A command-line tool for *Windows*.
+* A command-line tool for _*nix_.
+* A native GUI tool for *Windows*.
+
+*EMTS* relies on two companion libraries:
+
+* [LibGen](https://github.com/dtashley/LibGen), a general-purpose
+  non-numeric C / C++ library, distributed in source code form.
+* [LibNum](https://github.com/dtashley/LibNum), a numeric
+  C / C++ / assembly-language library, ,distributed in source code
+  form
+
+The general process of building an EMTS project involves these
+steps:
+
+* Check out and arrange *EMTS*, *LibGen*, *LibNum*, and project-specific
+  files in a recommended directory arrangement.
+* Incorporate the necessary source files into the project being built.
+* Set up preprocessor directives so that *EMTS*, *LibGen*, and *LibNum* build
+  as intended.
+* Build the project.
+
+*EMTS*, *LibGen*, and *LibNum* are all provided under _The Unlicense_,
+so there are no restrictions on their use, no obligation to make
+source code changes public, and no obligation to disclose to end users
+a program incorporates open-source software.
+
+## License
+
+TBD.
+
+### The Unlicense
+
+TBD.
+
+### License Clarifications
+
+TBD.
+
+
 *Emts* (*Em*bedded System *T*ool*s*et Base)
 is a set of software source files (and related files and
 information) used to assist in the construction
