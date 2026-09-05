@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="emts.vcxproj" Id="04f666f3-3c35-4825-9774-4ea2bb539875" />
+</Solution>

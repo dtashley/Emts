@@ -1,0 +1,6 @@
+*.user
+*.txt
+/emts/**
+/.vs/**
+/packages/**
+/x64/**

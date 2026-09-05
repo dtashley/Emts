@@ -1,0 +1,136 @@
+%----------------------------------------------------------------------------------------------------
+%emts_base.tex -- Main LaTeX file for the EMTS Base.
+%----------------------------------------------------------------------------------------------------
+\documentclass[letterpaper,10pt,titlepage]{custbook}
+%
+\pagestyle{headings}
+%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[ansinew]{inputenc}
+\usepackage[OT1]{fontenc}
+\usepackage{graphicx}
+\usepackage{makeidx}
+%
+%Necessary to use the makeidx package.
+\makeindex
+%
+%Shared mathematical definitions
+\input{misc_latex/mdefs}
+%
+%Hyphenation exceptions
+\input{misc_latex/hxcp}
+%
+%New environments, etc.
+\input{misc_latex/nenv}
+%
+%Book, chapter, and some section titles.
+\input{misc_latex/titlechapdefs}
+%
+\begin{document}
+%
+%Index "see" definitions
+\input{misc_latex/idxs}
+%
+%Title page(s)
+\input{misc_latex/titlepage}
+%
+\vspace{-0.45in}
+%
+%Declare this as frontmatter, the front portion before the meat
+%of the book.
+\frontmatter{}
+%
+%Preface
+\input{misc_latex/preface}
+%
+%Acknowledgements
+\input{misc_latex/acknowledgments}
+%
+%Table of contents
+\tableofcontents
+%
+%List of tables
+\listoftables
+%
+%List of figures
+\listoffigures
+%
+%List of algorithms
+\listofalgorithms
+%
+%Everything after this is the main matter, the "meat"
+%of the book.
+\mainmatter{}
+%
+%New part: Introduction
+\part{\partonetitle{}}
+
+%Chapter:  Introduction To Small Microcontroller Work
+\input{c_int2/c_int2}
+
+%New part: Introduction
+\part{\parttwotitle{}}
+
+%Chapter:  Technical Features of EMTS_BASE
+\input{c_tfe0/c_tfe0}
+
+%Chapter:  The CLIKE Scripting Language
+\input{c_clk0/c_clk0}
+
+%Chapter:  Customizing and Extending EMTS_BASE
+\input{c_wbe0/c_wbe0}
+
+%Chapter:  Text File Annotation Conventions
+\input{c_tfa1/c_tfa1}
+
+%New part: Built-In Functions
+\part{\partthreetitle{}}
+
+%Chapter:  Built-In Functions
+\input{c_bif0/c_bif0}
+
+%New part: Included Extensions
+\part{\partfourtitle{}}
+
+%Chapter:  Ill-Formatted Text File (IFTF) Extension
+\input{c_ift0/c_ift0}
+
+% New part: Administrative Procedures
+\part{\partfivetitle{}}
+
+%Chapter:  Software Purchase and Setup Procedures
+\input{c_sps0/c_sps0}
+
+% New part: Glossaries, Bibliography, And Index
+\part{\partsixtitle{}}
+
+%Mark the start of appendices.  This causes numbering to be with letters
+%instead of numbers.
+\appendix
+
+%Glossary Of Terms
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Glossary Of Terms}
+\input{c_glo4/c_glo4}
+%
+%Glossary Of Mathematical Notation
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Glossary Of Mathematical Notation}
+\input{c_glo5/c_glo5}
+%
+%Bibliography
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Bibliography}
+\input{misc_latex/bibliography}
+%
+%Index Must Be Formed At This Directory Level
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Index}
+\printindex
+%
+\end{document}
+%
+%End of file ucbka.tex.
+

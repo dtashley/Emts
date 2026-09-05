@@ -1,0 +1,168 @@
+\chapter{\cinttwotitle{}}
+
+\label{cint2}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Overview of This Manual}
+\label{cint2:siov0}
+
+This manual describes \emph{\productname{}}, a customizable tool integration
+framework.
+
+\emph{\productname{}} is a customizable tool integration framework:
+\begin{itemize}
+      \item It allows the same tools, built from the same source code,
+            to be used in a consistent way in the following forms:
+            \begin{itemize}
+                  \item Standalone console-mode programs.
+                  \item As built-in functions in a scripting language, \emph{CLIKE}.
+                  \item As programs with a GUI interface.
+            \end{itemize}
+      \item It provides a base product with substantial functionality that can be
+            customized and extended through:
+            \begin{itemize}
+                \item The addition of functionality packaged as standalone conole-mode programs,
+                      built-in functions in a scripting langauge, and panels in GUI
+                      program.
+                \item Customized opening graphics.
+                \item Customized help and contact information.
+          \end{itemize}
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Overview of \productname{}}
+\label{cint2:siov1}
+
+\emph{\productname{}} contains a core, called the \emph{core}
+or the \emph{\productname{} core},
+that is not designed to be divided.  Any proprietary or custom tool built
+using \emph{\productname{}} would contain the entire core, combined
+with additional proprietary or custom content.
+
+Outside of the core, the fundamental building block of \emph{\productname{}}
+is the \emph{\productname{} module}, or \emph{module}.  A module is the
+smallest unit that can be included or not included in a build
+of \emph{\productname{}}.  A module is atomic and not designed to
+divided.  A \emph{tool} generally corresponds to closely related functionality;
+cryptographic hashing functions, for example.
+
+A module may contain one or more \emph{tools}.  A tool generally
+corresponds to narrow functionality; the SHA256 hash, for example.
+
+A tool may contain one or more \emph{commands}.  A command
+generally has very narrow scope to support a tool.  For example,
+an SHA256 tool might contain two commands, one to calculate the
+hash of a string, and another to calculate the hash of a file.
+
+The notions of module, tool, and command are subjective enough
+that no guarantees can be made about how they might be
+defined.  The only guarantee that can be made is that a
+module corresponds to an integral number of panels
+in the graphical tool.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Motivation for \emph{\productname{}}}
+%Section tag: MFP0
+\label{cint2:smfp0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Detailed Description of \emph{\productname{}}}
+%Section tag: DDP0
+\label{cint2:sddp0}
+
+This manual describes \emph{\productname{}}, a customizable tool integration
+framework.
+
+\emph{\productname{}} is a customizable tool integration framework:
+\begin{itemize}
+      \item It allows the same tools, built from the same source code,
+            to be used in a consistent way in the following forms:
+            \begin{itemize}
+                  \item Standalone console-mode programs.
+                  \item As built-in functions in a scripting language, \emph{CLIKE}.
+                  \item As programs with a GUI interface.
+            \end{itemize}
+      \item It provides a base product with substantial functionality that can be
+            customized and extended through:
+            \begin{itemize}
+                \item The addition of functionality packaged as standalone conole-mode programs,
+                      built-in functions in a scripting langauge, and panels in GUI
+                      program.
+                \item Customized opening graphics.
+                \item Customized help and contact information.
+          \end{itemize}
+\end{itemize}
+
+%Certum card instructions.
+%
+%Cut the card out of the holder.
+%
+%Installed in the reader (took a little guessing to get it open).
+%
+%Installed the SmartCard reader drivers from the ACS website.
+%
+%Rebooted to be sure.
+%
+%Installed the ProCertum CardManager, 64-bit MSI.
+%
+%Rebooted per instructions.
+%
+%Read card, Initialized, then set my standard 6-digit value for both PIN and PUK (they are set identically).
+%
+%20240810:  Results from renewing code signing certificate.  Went through automatic verification
+%           process tonight.  It involved a cellphone and taking a picture of my identity
+%           document (passport), and some shots of my face.
+%
+%           Status of process unclear.  Believe I've done all I can do.  Should know by
+%           Monday, which should be a work day for Certum.
+%
+%           Process is unclear.  I believed I would use old certificate to help authenticate
+%           the renewal, but from the instructions it appears that I don't do this.
+%
+%           Could not find earlier notes anywhere, so it appears I will have to re-document
+%           how to use the card, or search more for my earlier notes.
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%End of file c_int2.tex
