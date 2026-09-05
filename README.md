@@ -4,6 +4,1043 @@ is a set of software source files (and related files and
 information) used to assist in the construction
 of PC and server tools.
 
+
+This manual describes \emph{\productname{}}, a tool integration
+framework designed for embedded software development work.
+
+\emph{\productname{}} provides the ability to package C/C++ tools
+in several distinct forms, using the same underlying source code:
+
+\begin{itemize}
+      \item As commands available from an interactive shell, provided
+            by the tool.
+      \item As a console-mode program (no scripting or graphical functionality).
+      \item As functions in a custom scripting language interpreter.
+            (The scripting language is tentatively
+            named \emph{\scriptinglanguagenamemc{}}).
+      \item As functionality utilized from a \emph{Windows} GUI interface.
+\end{itemize}
+
+
+
+Although \emph{\productname{}} can be built for both \emph{Windows} and
+\emph{Unix}, graphical capability is available only for \emph{Windows}.
+
+\emph{\productname{}} is best described as a tool integration framework
+because it is possible to integrate custom tools (most commonly,
+proprietary corporate tools) into the framework and create proprietary or
+custom tools that are a mixture of \emph{\productname{}} functionality
+and proprietary or custom functionality.
+
+My e-mail address is \emph{dashley@gmail.com}.\@ Please feel
+to contact me.
+\\\\
+\noindent\hspace*{2.5in}Dave Ashley\\
+\noindent\hspace*{2.5in}Allen Park, Michigan, USA\\
+\noindent\hspace*{2.5in}August, 2024
+
+
+
+\chapter*{Glossary Of Terms}
+\markboth{GLOSSARY OF TERMS}{GLOSSARY OF TERMS}
+
+\label{cglo2}
+
+\begin{vworktermglossaryenum}
+
+\item \textbf{cardinality}\index{cardinality}
+
+      The cardinality of a set is the
+      number of elements in the set.  In this work, the cardinality
+      of a set is denoted $n()$.  For example, 
+      $n(\{12,29,327\}) = 3$.
+
+\end{vworktermglossaryenum}
+
+%End of file c_glo2.tex
+
+
+\chapter*{Glossary Of Mathematical And Other Notation}
+\markboth{GLOSSARY OF MATHEMATICAL NOTATION}{GLOSSARY OF MATHEMATICAL NOTATION}
+
+\label{cglo3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{General Notation}
+
+\begin{vworkmathtermglossaryenum}
+
+\item \mbox{\boldmath $ \vworkdivides $}
+
+
+      $a \vworkdivides b$, 
+      \index{divides@divides ($\vworkdivides$)}
+      \index{--@$\vworkdivides$ (divides)}
+      read ``\emph{$a$ divides $b$}'', denotes that $b/a$ has no remainder.
+      Equivalently, it may be stated that
+      $(a \vworkdivides b) \Rightarrow (\exists c \in \vworkintset{}, b = ac)$.
+
+\item \mbox{\boldmath $ \vworknotdivides $}
+
+      $a \vworknotdivides b$, 
+      \index{divides@divides ($\vworkdivides$)}
+      \index{--@$\vworknotdivides$ (doesn't divide)}
+      read ``\emph{$a$ does not divide $b$}'', denotes that $b/a$ has a reminder.
+      Equivalently, it may be stated that
+      $(a \vworknotdivides b) \Rightarrow (\nexists c \in \vworkintset{}, b = ac)$.
+
+\item \mbox{\boldmath $ \lfloor \cdot \rfloor $}
+
+      Used
+      \index{floor function@floor function ($\lfloor\cdot\rfloor$)}
+      \index{--@$\lfloor\cdot\rfloor$ (\emph{floor($\cdot$)} function)}
+      to denote the \emph{floor($\cdot$)} function.  The
+      \emph{floor($\cdot$)}
+      function is the largest integer not larger than the
+      argument.
+
+\item \mbox{\boldmath $\lceil \cdot \rceil$ }
+
+      Used
+      \index{ceiling function@ceiling function ($\lceil\cdot\rceil$)}
+      \index{--@$\lceil\cdot\rceil$ (\emph{ceiling($\cdot$)} function)}
+      to denote the \emph{ceiling($\cdot$)} function.
+      The \emph{ceiling($\cdot$)} function
+      is the smallest integer not smaller than the
+      argument.
+\end{vworkmathtermglossaryenum}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Usage Of English And Greek Letters}
+
+\begin{vworkmathtermglossaryenum}
+
+\item \mbox {\boldmath $a/b$}
+
+      An arbitrary \index{rational number}rational number.
+
+\item \mbox {\boldmath $ F_N $}
+
+      The \index{Farey series}Farey 
+      series of order $N$.  The Farey series is the
+      ordered set of irreducible rational numbers 
+	  in [0,1] with a
+      denominator not larger than $N$.
+
+\item \mbox {\boldmath $F_{k_{MAX}, \overline{h_{MAX}}}$}
+      
+	  \index{FKMAXHMAX@$F_{k_{MAX}, \overline{h_{MAX}}}$}
+	  The ordered set of irreducible rational numbers
+	  $h/k$ subject to the constraints $0 \leq h \leq h_{MAX}$
+	  and $1 \leq k \leq h_{MAX}$.  
+	  (See Section \ref{cfry0:schk0}.)
+
+
+\item \mbox{\boldmath $H/K$}, \mbox{\boldmath $h/k$},
+      \mbox{\boldmath $h'/k'$}, \mbox{\boldmath $h''/k''$},
+      \mbox{\boldmath $h_i/k_i$}
+
+      Terms in a Farey series of order $N$.
+
+\item \mbox{\boldmath $r_A$}
+
+      The rational number $h/k$ used to approximate
+      an arbitrary real number $r_I$.
+
+\item \mbox{\boldmath $r_I$}
+
+      The real number, which may or may not be rational,
+      which is to be approximated by a rational number
+      $r_A = h/k$.
+
+\item \textbf{reduced}
+
+      See \emph{irreducible}.
+
+\item \mbox{\boldmath $s_k = p_k/q_k$}
+
+      The $k$th convergent of a continued fraction.
+
+\item \mbox{\boldmath $x_{MAX}$}
+
+      The largest element of the domain for which the
+      behavior of an approximation must be guaranteed.
+      In this paper, most derivations assume
+      that $x \in [0, x_{MAX}]$, $x_{MAX} \in \vworkintsetpos{}$.
+\end{vworkmathtermglossaryenum}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Bitfields And Portions Of Integers}
+
+\begin{vworkmathtermglossaryenum}
+\item \mbox{\boldmath $a_{b}$}
+
+      The $b$th bit of the integer $a$.  Bits are numbered with the
+      least significant bit ``0'', and consecutively through 
+      ``$n-1$'', where $n$ is the total number of bits.
+
+      In general, if $p$ is an $n$-bit unsigned integer,
+
+      \begin{equation}
+      \nonumber p = \sum_{i=0}^{n-1} 2^i p_i .
+      \end{equation}
+
+\item \mbox{\boldmath $a_{c:b}$}
+
+      The integer consisting of the $b$th through the
+      $c$th bits of the integer $a$.  Bits are numbered with the
+      least significant bit ``0'', and consecutively through 
+      ``$n-1$'', where $n$ is the total number of bits.
+
+      For example, if $p$ is a 24-bit unsigned integer, then
+
+      \begin{equation}
+      \nonumber p = 2^{16}p_{23:16} + 2^{8}p_{15:8} + p_{7:0} .
+      \end{equation}
+
+\item \mbox{\boldmath $a_{[b]}$}
+
+      The $b$th word of the integer $a$.  Words are numbered 
+      with the
+      least significant word ``0'', and consecutively through 
+      ``$n-1$'', where $n$ is the total number of words.
+
+      In general, if $p$ is an $n$-word unsigned integer 
+      and $z$ is the wordsize in bits,
+
+      \begin{equation}
+      \nonumber p = \sum_{i=0}^{n-1} 2^{iz} p_i .
+      \end{equation}
+
+\item \mbox{\boldmath $a_{[c:b]}$}
+
+      The integer consisting of the $b$th through the
+      $c$th word of the integer $a$.  Words are numbered with the
+      least significant word ``0'', and consecutively through 
+      ``$n-1$'', where $n$ is the total number of words.
+
+      For example, if $p$ is a 24-word unsigned integer and
+      $z$ is the wordsize in bits, then
+
+      \begin{equation}
+      \nonumber p = 2^{16z}p_{[23:16]} + 2^{8z}p_{[15:8]} + p_{[7:0]} .
+      \end{equation}
+
+\end{vworkmathtermglossaryenum}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Matrices And Vectors}
+
+\begin{vworkmathtermglossaryenum}
+
+\item \mbox{\boldmath $0$}
+
+      $\mathbf{0}$ (in bold face) is used to denote either a vector or matrix
+      populated with all zeroes.  Optionally, in cases where the context is not clear
+      or where there is cause to highlight the dimension, $\mathbf{0}$ may be subscripted
+      to indicate the dimension, i.e. 
+      
+      \begin{equation}
+      \nonumber
+      \mathbf{0}_3 = \left[\begin{array}{c} 0 \\ 0 \\ 0 \end{array}\right]
+      \end{equation}
+
+      \begin{equation}
+      \nonumber
+      \mathbf{0}_{3 \times 2} = \left[\begin{array}{cc} 0&0 \\ 0&0 \\ 0&0 \end{array}\right]
+      \end{equation}
+
+\item \mbox{\boldmath $I$}
+
+      $I$ is used to denote the square identity matrix (the matrix with all
+      elements 0 except elements on the diagonal which are 1).
+      Optionally, in cases where the context is not clear
+      or where there is cause to highlight the dimension, $I$ may be subscripted
+      to indicate the dimension, i.e. 
+      
+      \begin{equation}
+      \nonumber
+      I = I_3 = I_{3 \times 3} = \left[\begin{array}{ccc} 1&0&0 \\ 0&1&0 \\ 0&0&1 \end{array}\right]
+      \end{equation}
+
+\end{vworkmathtermglossaryenum}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Sets And Set Notation}
+
+\begin{vworkmathtermglossaryenum}
+
+\item \mbox{\boldmath $n(A)$}
+
+      The \index{cardinality}cardinality of set $A$.  (The cardinality of a set is the
+      number of elements in the set.)
+
+\end{vworkmathtermglossaryenum}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Sets Of Numbers}
+
+\begin{vworkmathtermglossaryenum}
+
+\item \mbox{\boldmath $\vworkintsetpos$}
+
+      The 
+      \index{natural number}
+      \index{N@$\vworkintsetpos$}
+      set of positive integers (natural numbers).
+
+\item \mbox{\boldmath $\vworkratset$}
+
+      The 
+      \index{rational number}
+      \index{Q@$\vworkratset$}
+      set of rational numbers.
+
+\item \mbox{\boldmath $\vworkratsetnonneg$}
+
+      The 
+      \index{rational number}
+      \index{Q+@$\vworkratsetnonneg$}
+      set of non-negative rational numbers.
+
+\item \mbox{\boldmath $\vworkrealset$}
+
+      The 
+      \index{real number}
+      \index{R@$\vworkrealset$}
+      set of real numbers.
+
+\item \mbox{\boldmath $\vworkrealsetnonneg$}
+
+      The 
+      \index{real number}
+      \index{R+@$\vworkrealsetnonneg$}
+      set of non-negative real numbers.
+
+\item \mbox{\boldmath $\vworkintset$}
+
+      The 
+      \index{integer}
+      \index{Z@$\vworkintset$}
+      set of integers.
+
+\item \mbox{\boldmath $\vworkintsetnonneg$}
+
+      The 
+      \index{integer}
+      \index{Z+@$\vworkintsetnonneg$}
+      set of non-negative integers.
+
+\end{vworkmathtermglossaryenum}
+
+%End of file c_glo3.tex
+
+\chapter{\cinttwotitle{}}
+
+\label{cint2}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Overview of This Manual}
+\label{cint2:siov0}
+
+This manual describes \emph{\productname{}}, a customizable tool integration
+framework.
+
+\emph{\productname{}} is a customizable tool integration framework:
+\begin{itemize}
+      \item It allows the same tools, built from the same source code,
+            to be used in a consistent way in the following forms:
+            \begin{itemize}
+                  \item Standalone console-mode programs.
+                  \item As built-in functions in a scripting language, \emph{CLIKE}.
+                  \item As programs with a GUI interface.
+            \end{itemize}
+      \item It provides a base product with substantial functionality that can be
+            customized and extended through:
+            \begin{itemize}
+                \item The addition of functionality packaged as standalone conole-mode programs,
+                      built-in functions in a scripting langauge, and panels in GUI
+                      program.
+                \item Customized opening graphics.
+                \item Customized help and contact information.
+          \end{itemize}
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Overview of \productname{}}
+\label{cint2:siov1}
+
+\emph{\productname{}} contains a core, called the \emph{core}
+or the \emph{\productname{} core},
+that is not designed to be divided.  Any proprietary or custom tool built
+using \emph{\productname{}} would contain the entire core, combined
+with additional proprietary or custom content.
+
+Outside of the core, the fundamental building block of \emph{\productname{}}
+is the \emph{\productname{} module}, or \emph{module}.  A module is the
+smallest unit that can be included or not included in a build
+of \emph{\productname{}}.  A module is atomic and not designed to
+divided.  A \emph{tool} generally corresponds to closely related functionality;
+cryptographic hashing functions, for example.
+
+A module may contain one or more \emph{tools}.  A tool generally
+corresponds to narrow functionality; the SHA256 hash, for example.
+
+A tool may contain one or more \emph{commands}.  A command
+generally has very narrow scope to support a tool.  For example,
+an SHA256 tool might contain two commands, one to calculate the
+hash of a string, and another to calculate the hash of a file.
+
+The notions of module, tool, and command are subjective enough
+that no guarantees can be made about how they might be
+defined.  The only guarantee that can be made is that a
+module corresponds to an integral number of panels
+in the graphical tool.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Motivation for \emph{\productname{}}}
+%Section tag: MFP0
+\label{cint2:smfp0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Detailed Description of \emph{\productname{}}}
+%Section tag: DDP0
+\label{cint2:sddp0}
+
+This manual describes \emph{\productname{}}, a customizable tool integration
+framework.
+
+\emph{\productname{}} is a customizable tool integration framework:
+\begin{itemize}
+      \item It allows the same tools, built from the same source code,
+            to be used in a consistent way in the following forms:
+            \begin{itemize}
+                  \item Standalone console-mode programs.
+                  \item As built-in functions in a scripting language, \emph{CLIKE}.
+                  \item As programs with a GUI interface.
+            \end{itemize}
+      \item It provides a base product with substantial functionality that can be
+            customized and extended through:
+            \begin{itemize}
+                \item The addition of functionality packaged as standalone conole-mode programs,
+                      built-in functions in a scripting langauge, and panels in GUI
+                      program.
+                \item Customized opening graphics.
+                \item Customized help and contact information.
+          \end{itemize}
+\end{itemize}
+
+%Certum card instructions.
+%
+%Cut the card out of the holder.
+%
+%Installed in the reader (took a little guessing to get it open).
+%
+%Installed the SmartCard reader drivers from the ACS website.
+%
+%Rebooted to be sure.
+%
+%Installed the ProCertum CardManager, 64-bit MSI.
+%
+%Rebooted per instructions.
+%
+%Read card, Initialized, then set my standard 6-digit value for both PIN and PUK (they are set identically).
+%
+%20240810:  Results from renewing code signing certificate.  Went through automatic verification
+%           process tonight.  It involved a cellphone and taking a picture of my identity
+%           document (passport), and some shots of my face.
+%
+%           Status of process unclear.  Believe I've done all I can do.  Should know by
+%           Monday, which should be a work day for Certum.
+%
+%           Process is unclear.  I believed I would use old certificate to help authenticate
+%           the renewal, but from the instructions it appears that I don't do this.
+%
+%           Could not find earlier notes anywhere, so it appears I will have to re-document
+%           how to use the card, or search more for my earlier notes.
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%End of file c_int2.tex
+
+\chapter{\cspszerotitle{}}
+
+\label{csps0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Purchase and Setup of Code Signing Certificate}
+%Section tag: PSC0
+\label{csps0:spsc0}
+
+All of the lines are \LaTeX{} comments until I get it formatted and
+ready for compilation.
+
+% Purchased from Certum.  All went according to published procedures,
+% except installation of certificate per instruction.
+% 
+% My issue is solved.  Please disregard my technical support request (although if there is
+% anything additional I should read, I'd be grateful for links).
+% 
+% a)I ran the command shell as administrator (that seems to make a difference).
+% 
+% b)I used the ``/debug'' option with SIGNTOOL and determined that it is only looking in
+% the Personal/Certificates area of the stored certificates.  The proCertum application
+% installs the certificate in the Other People/Certificates area of the stored
+% certificates, which is apparently not checked by SIGNTOOL. 
+% So I had to import the certificate into the right location.
+% 
+% Step #1
+% -------
+% After installing certificate from the proCertum Card application, made sure it was present in both Personal/Certificates
+% and Other People/Certificates folders.  Copy and Paste within certmgr does that.
+%
+% Step #2
+% -------
+% Discovered that there is a "certlm" application as well as a "certmgr" application.  Believe I may have tried putting
+% certificates there as well, but I'm not sure it made a difference.  Local machine versus local user.
+%
+% Step #3
+% -------
+% Discovered that the "/debug" option has to be placed immediately after "sign".
+%
+% "c:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x64\signtool.exe" sign /n "David Ashley" /t http://time.certum.pl/ /fd sha256 /v emts_ifsfscan.exe /debug
+%
+% versus
+%
+% "c:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x64\signtool.exe" sign /debug /n "David Ashley" /t http://time.certum.pl/ /fd sha256 /v emts_ifsfscan.exe
+%
+% Step #4
+% -------
+% Based on various Internet postings, tried this command:
+%
+% certutil -repairstore
+%
+% Seemed to have no effect.
+%
+% Step #5
+% -------
+% Upgraded to the latest version of the windows kit, 26100.  That changed the command line slightly.
+%
+% Step #6
+% -------
+% Determined that the problem was with the "Private Key filter".
+
+% C:\Users\dashl\Documents>"c:\Program Files (x86)\Windows Kits\10\bin\10.0.26100.0\x64\signtool.exe" sign /debug /n "David Ashley" /t http://time.certum.pl/ /fd sha256 /v emts_ifsfscan.exe
+% 
+% The following certificates were considered:
+%     Issued to: David Ashley
+%     Issued by: Certum Code Signing 2021 CA
+%     Expires:   Sat Aug 16 01:46:38 2025
+%     SHA1 hash: D5F54EEBC165FE82202C2DB9B633D4885B12E5C5
+% 
+%     Issued to: c1e26399-5bee-45e3-9c33-e51655695ace
+%     Issued by: c1e26399-5bee-45e3-9c33-e51655695ace
+%     Expires:   Thu Mar 20 11:14:56 2025
+%     SHA1 hash: 4DECD3C81B96AEB6C226C5126E4DE999506A953D
+% 
+%     Issued to: 1418c40a-aa3e-4259-a258-2d929d1b383b
+%     Issued by: 1418c40a-aa3e-4259-a258-2d929d1b383b
+%     Expires:   Thu Jan 16 10:55:18 2025
+%     SHA1 hash: 3B3A4254A5CDAE9F4A975C272259064854624C9F
+% 
+%     Issued to: a3665860-c4e0-4b3e-adc5-ffe3bfd8721a
+%     Issued by: MS-Organization-Access
+%     Expires:   Mon Jan 07 18:55:40 2030
+%     SHA1 hash: 17784374B18C0EB9EB0346442EC21B4984D6225A
+% 
+% After EKU filter, 3 certs were left.
+% After expiry filter, 3 certs were left.
+% After Subject Name filter, 1 certs were left.
+% After Private Key filter, 0 certs were left.
+% SignTool Error: No certificates were found that met all the given criteria.
+%
+% Searched the Internet.
+%
+% Step #7
+% -------
+% Got information from certmgr.
+% 
+% C:\Users\dashl\Documents>certutil -scinfo
+% The Microsoft Smart Card Resource Manager is running.
+% Current reader/card status:
+% Readers: 1
+%   0: ACS ACR39U ICC Reader 0
+% --- Reader: ACS ACR39U ICC Reader 0
+% --- Status: SCARD_STATE_PRESENT | SCARD_STATE_UNPOWERED
+% --- Status: The card is available for use.
+% ---   Card:  cryptoCertum3.6
+% ---    ATR:
+%         3b 7f 96 00 00 80 31 80  58 43 65 72 74 75 6d 30   ;.....1.XCertum0
+%         31 82 90 00                                        1...
+% 
+% 
+% =======================================================
+% Analyzing card in reader: ACS ACR39U ICC Reader 0
+% 
+% --------------===========================--------------
+% ================ Certificate 0 ================
+% --- Reader: ACS ACR39U ICC Reader 0
+% ---   Card:  cryptoCertum3.6
+% Provider = Microsoft Base Smart Card Crypto Provider
+% Key Container = CFC2BAB12D160BF78F203DDC1E78D95A7E7D644
+% 
+% Serial Number: 65c7bf928db4fff3558e09aa30e8c49e
+% Issuer: CN=Certum Code Signing 2021 CA, O=Asseco Data Systems S.A., C=PL
+%  NotBefore: 8/16/2024 1:46 AM
+%  NotAfter: 8/16/2025 1:46 AM
+% Subject: CN=David Ashley, O=David Ashley, L=Allen Park, S=Michigan, C=US
+% Non-root Certificate
+% Cert Hash(sha1): d5f54eebc165fe82202c2db9b633d4885b12e5c5
+% 
+% Performing AT_SIGNATURE public key matching test...
+% Public key matching test succeeded
+%   Key Container = CFC2BAB12D160BF78F203DDC1E78D95A7E7D644
+%   Provider = Microsoft Base Smart Card Crypto Provider
+%   ProviderType = 1
+%   Flags = 1
+%     0x1 (1)
+%   KeySpec = 2 -- AT_SIGNATURE
+% Private key verifies
+% 
+% Performing cert chain verification...
+% Chain validates
+% Smart Card Logon: Chain on smart card is invalid
+% dwFlags = CA_VERIFY_FLAGS_CONSOLE_TRACE (0x20000000)
+% dwFlags = CA_VERIFY_FLAGS_DUMP_CHAIN (0x40000000)
+% ChainFlags = CERT_CHAIN_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT (0x40000000)
+% HCCE_LOCAL_MACHINE
+% CERT_CHAIN_POLICY_BASE
+% -------- CERT_CHAIN_CONTEXT --------
+% ChainContext.dwInfoStatus = CERT_TRUST_HAS_PREFERRED_ISSUER (0x100)
+% ChainContext.dwRevocationFreshnessTime: 5 Days, 18 Hours, 6 Minutes, 26 Seconds
+% 
+% SimpleChain.dwInfoStatus = CERT_TRUST_HAS_PREFERRED_ISSUER (0x100)
+% SimpleChain.dwRevocationFreshnessTime: 5 Days, 18 Hours, 6 Minutes, 26 Seconds
+% 
+% CertContext[0][0]: dwInfoStatus=102 dwErrorStatus=0
+%   Issuer: CN=Certum Code Signing 2021 CA, O=Asseco Data Systems S.A., C=PL
+%   NotBefore: 8/16/2024 1:46 AM
+%   NotAfter: 8/16/2025 1:46 AM
+%   Subject: CN=David Ashley, O=David Ashley, L=Allen Park, S=Michigan, C=US
+%   Serial: 65c7bf928db4fff3558e09aa30e8c49e
+%   Cert: d5f54eebc165fe82202c2db9b633d4885b12e5c5
+%   Element.dwInfoStatus = CERT_TRUST_HAS_KEY_MATCH_ISSUER (0x2)
+%   Element.dwInfoStatus = CERT_TRUST_HAS_PREFERRED_ISSUER (0x100)
+%     CRL (null):
+%     Issuer: CN=Certum Code Signing 2021 CA Validation Service, O=Asseco Data Systems S.A., C=PL
+%     ThisUpdate: 8/16/2024 11:04 AM
+%     NextUpdate: 8/23/2024 11:04 AM
+%     CRL: 2ece42454c488182ca9be31a1e43bc455028c0ee
+%   Issuance[0] = 2.23.140.1.4.1
+%   Issuance[1] = 1.2.616.1.113527.2.5.1.4
+%   Application[0] = 1.3.6.1.5.5.7.3.3 Code Signing
+% 
+% CertContext[0][1]: dwInfoStatus=102 dwErrorStatus=0
+%   Issuer: CN=Certum Trusted Network CA 2, OU=Certum Certification Authority, O=Unizeto Technologies S.A., C=PL
+%   NotBefore: 5/19/2021 1:32 AM
+%   NotAfter: 5/18/2036 1:32 AM
+%   Subject: CN=Certum Code Signing 2021 CA, O=Asseco Data Systems S.A., C=PL
+%   Serial: 99a3800a26553b65abdc6e84a6b3ea39
+%   Cert: 8d57e2b4008bbe461470a69f3492bc5ae362a7a9
+%   Element.dwInfoStatus = CERT_TRUST_HAS_KEY_MATCH_ISSUER (0x2)
+%   Element.dwInfoStatus = CERT_TRUST_HAS_PREFERRED_ISSUER (0x100)
+%     CRL (null):
+%     Issuer: CN=Certum Trusted Network CA 2 Validation Service, O=Asseco Data Systems S.A., C=PL
+%     ThisUpdate: 8/10/2024 6:10 PM
+%     NextUpdate: 8/17/2024 6:10 PM
+%     CRL: 4766a90c4ef022d93996acfa27318c548a4595f8
+%   Application[0] = 1.3.6.1.5.5.7.3.3 Code Signing
+% 
+% CertContext[0][2]: dwInfoStatus=10c dwErrorStatus=0
+%   Issuer: CN=Certum Trusted Network CA 2, OU=Certum Certification Authority, O=Unizeto Technologies S.A., C=PL
+%   NotBefore: 10/6/2011 4:39 AM
+%   NotAfter: 10/6/2046 4:39 AM
+%   Subject: CN=Certum Trusted Network CA 2, OU=Certum Certification Authority, O=Unizeto Technologies S.A., C=PL
+%   Serial: 21d6d04a4f250fc93237fcaa5e128de9
+%   Cert: d3dd483e2bbf4c05e8af10f5fa7626cfd3dc3092
+%   Element.dwInfoStatus = CERT_TRUST_HAS_NAME_MATCH_ISSUER (0x4)
+%   Element.dwInfoStatus = CERT_TRUST_IS_SELF_SIGNED (0x8)
+%   Element.dwInfoStatus = CERT_TRUST_HAS_PREFERRED_ISSUER (0x100)
+%   Application[0] = 1.3.6.1.5.5.7.3.2 Client Authentication
+%   Application[1] = 1.3.6.1.5.5.7.3.3 Code Signing
+%   Application[2] = 1.3.6.1.5.5.7.3.4 Secure Email
+%   Application[3] = 1.3.6.1.5.5.7.3.1 Server Authentication
+%   EV[0] = 1.2.616.1.113527.2.5.1.1
+%   EV[1] = 1.2.616.1.113527.2.5.1.7
+%   EV[2] = 2.23.140.1.3
+% 
+% Exclude leaf cert:
+%   Chain: aed7917909ae63983d4878bef16ee07368b32bc0
+% Full chain:
+%   Chain: f175a0509a47c4d296f311acb97789b08ef23f1b
+% ------------------------------------
+% Verified Issuance Policies:
+%     2.23.140.1.4.1
+%     1.2.616.1.113527.2.5.1.4
+% Verified Application Policies:
+%     1.3.6.1.5.5.7.3.3 Code Signing
+% Displayed AT_SIGNATURE cert for reader: ACS ACR39U ICC Reader 0
+% Serial Number: 65c7bf928db4fff3558e09aa30e8c49e
+% Issuer: CN=Certum Code Signing 2021 CA, O=Asseco Data Systems S.A., C=PL
+%  NotBefore: 8/16/2024 1:46 AM
+%  NotAfter: 8/16/2025 1:46 AM
+% Subject: CN=David Ashley, O=David Ashley, L=Allen Park, S=Michigan, C=US
+% Non-root Certificate
+% Cert Hash(sha1): d5f54eebc165fe82202c2db9b633d4885b12e5c5
+% 
+% Performing AT_KEYEXCHANGE public key matching test...
+% Public key matching test succeeded
+%   Key Container = CFC2BAB12D160BF78F203DDC1E78D95A7E7D644
+%   Provider = Microsoft Base Smart Card Crypto Provider
+%   ProviderType = 1
+%   Flags = 1
+%     0x1 (1)
+%   KeySpec = 1 -- AT_KEYEXCHANGE
+% Private key verifies
+% 
+% Performing cert chain verification...
+% Chain validates
+% Smart Card Logon: Chain on smart card is invalid
+% dwFlags = CA_VERIFY_FLAGS_CONSOLE_TRACE (0x20000000)
+% dwFlags = CA_VERIFY_FLAGS_DUMP_CHAIN (0x40000000)
+% ChainFlags = CERT_CHAIN_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT (0x40000000)
+% HCCE_LOCAL_MACHINE
+% CERT_CHAIN_POLICY_BASE
+% -------- CERT_CHAIN_CONTEXT --------
+% ChainContext.dwInfoStatus = CERT_TRUST_HAS_PREFERRED_ISSUER (0x100)
+% ChainContext.dwRevocationFreshnessTime: 5 Days, 18 Hours, 6 Minutes, 28 Seconds
+% 
+% SimpleChain.dwInfoStatus = CERT_TRUST_HAS_PREFERRED_ISSUER (0x100)
+% SimpleChain.dwRevocationFreshnessTime: 5 Days, 18 Hours, 6 Minutes, 28 Seconds
+% 
+% CertContext[0][0]: dwInfoStatus=102 dwErrorStatus=0
+%   Issuer: CN=Certum Code Signing 2021 CA, O=Asseco Data Systems S.A., C=PL
+%   NotBefore: 8/16/2024 1:46 AM
+%   NotAfter: 8/16/2025 1:46 AM
+%   Subject: CN=David Ashley, O=David Ashley, L=Allen Park, S=Michigan, C=US
+%   Serial: 65c7bf928db4fff3558e09aa30e8c49e
+%   Cert: d5f54eebc165fe82202c2db9b633d4885b12e5c5
+%   Element.dwInfoStatus = CERT_TRUST_HAS_KEY_MATCH_ISSUER (0x2)
+%   Element.dwInfoStatus = CERT_TRUST_HAS_PREFERRED_ISSUER (0x100)
+%     CRL (null):
+%     Issuer: CN=Certum Code Signing 2021 CA Validation Service, O=Asseco Data Systems S.A., C=PL
+%     ThisUpdate: 8/16/2024 11:04 AM
+%     NextUpdate: 8/23/2024 11:04 AM
+%     CRL: 2ece42454c488182ca9be31a1e43bc455028c0ee
+%   Issuance[0] = 2.23.140.1.4.1
+%   Issuance[1] = 1.2.616.1.113527.2.5.1.4
+%   Application[0] = 1.3.6.1.5.5.7.3.3 Code Signing
+% 
+% CertContext[0][1]: dwInfoStatus=102 dwErrorStatus=0
+%   Issuer: CN=Certum Trusted Network CA 2, OU=Certum Certification Authority, O=Unizeto Technologies S.A., C=PL
+%   NotBefore: 5/19/2021 1:32 AM
+%   NotAfter: 5/18/2036 1:32 AM
+%   Subject: CN=Certum Code Signing 2021 CA, O=Asseco Data Systems S.A., C=PL
+%   Serial: 99a3800a26553b65abdc6e84a6b3ea39
+%   Cert: 8d57e2b4008bbe461470a69f3492bc5ae362a7a9
+%   Element.dwInfoStatus = CERT_TRUST_HAS_KEY_MATCH_ISSUER (0x2)
+%   Element.dwInfoStatus = CERT_TRUST_HAS_PREFERRED_ISSUER (0x100)
+%     CRL (null):
+%     Issuer: CN=Certum Trusted Network CA 2 Validation Service, O=Asseco Data Systems S.A., C=PL
+%     ThisUpdate: 8/10/2024 6:10 PM
+%     NextUpdate: 8/17/2024 6:10 PM
+%     CRL: 4766a90c4ef022d93996acfa27318c548a4595f8
+%   Application[0] = 1.3.6.1.5.5.7.3.3 Code Signing
+% 
+% CertContext[0][2]: dwInfoStatus=10c dwErrorStatus=0
+%   Issuer: CN=Certum Trusted Network CA 2, OU=Certum Certification Authority, O=Unizeto Technologies S.A., C=PL
+%   NotBefore: 10/6/2011 4:39 AM
+%   NotAfter: 10/6/2046 4:39 AM
+%   Subject: CN=Certum Trusted Network CA 2, OU=Certum Certification Authority, O=Unizeto Technologies S.A., C=PL
+%   Serial: 21d6d04a4f250fc93237fcaa5e128de9
+%   Cert: d3dd483e2bbf4c05e8af10f5fa7626cfd3dc3092
+%   Element.dwInfoStatus = CERT_TRUST_HAS_NAME_MATCH_ISSUER (0x4)
+%   Element.dwInfoStatus = CERT_TRUST_IS_SELF_SIGNED (0x8)
+%   Element.dwInfoStatus = CERT_TRUST_HAS_PREFERRED_ISSUER (0x100)
+%   Application[0] = 1.3.6.1.5.5.7.3.2 Client Authentication
+%   Application[1] = 1.3.6.1.5.5.7.3.3 Code Signing
+%   Application[2] = 1.3.6.1.5.5.7.3.4 Secure Email
+%   Application[3] = 1.3.6.1.5.5.7.3.1 Server Authentication
+%   EV[0] = 1.2.616.1.113527.2.5.1.1
+%   EV[1] = 1.2.616.1.113527.2.5.1.7
+%   EV[2] = 2.23.140.1.3
+% 
+% Exclude leaf cert:
+%   Chain: aed7917909ae63983d4878bef16ee07368b32bc0
+% Full chain:
+%   Chain: f175a0509a47c4d296f311acb97789b08ef23f1b
+% ------------------------------------
+% Verified Issuance Policies:
+%     2.23.140.1.4.1
+%     1.2.616.1.113527.2.5.1.4
+% Verified Application Policies:
+%     1.3.6.1.5.5.7.3.3 Code Signing
+% Displayed AT_KEYEXCHANGE cert for reader: ACS ACR39U ICC Reader 0
+% 
+% --------------===========================--------------
+% ================ Certificate 0 ================
+% --- Reader: ACS ACR39U ICC Reader 0
+% ---   Card:  cryptoCertum3.6
+% Provider = Microsoft Smart Card Key Storage Provider
+% Key Container = CFC2BAB12D160BF78F203DDC1E78D95A7E7D644
+% 
+% Cannot open the  key for reader: ACS ACR39U ICC Reader 0
+% 
+% --------------===========================--------------
+% ================ Certificate 1 ================
+% --- Reader: ACS ACR39U ICC Reader 0
+% ---   Card:  cryptoCertum3.6
+% Provider = Microsoft Smart Card Key Storage Provider
+% Key Container = CFC2BAB12D160BF78F203DDC1E78D95A7E7D644
+% 
+% Cannot open the  key for reader: ACS ACR39U ICC Reader 0
+% 
+% --------------===========================--------------
+% 
+% Done.
+% CertUtil: -SCInfo command completed successfully.
+%
+% Step #8
+% -------
+% Got information about the cryptographic card, decided to try the /kc option.
+%
+% C:\Users\dashl\Documents>"c:\Program Files (x86)\Windows Kits\10\bin\10.0.26100.0\x64\signtool.exe" sign /debug /kc CFC2BAB12D160BF78F203DDC1E78D95A7E7D644 /n "David Ashley" /t http://time.certum.pl/ /fd sha256 /v emts_ifsfscan.exe
+% SignTool Error: The /k option requires the /csp option.
+% 
+% Step #9
+% --------
+% Got more information about the cryptographic card, decided to try the /csp option.
+%
+% C:\Users\dashl\Documents>
+% C:\Users\dashl\Documents>"c:\Program Files (x86)\Windows Kits\10\bin\10.0.26100.0\x64\signtool.exe" sign /debug /kc CFC2BAB12D160BF78F203DDC1E78D95A7E7D644 /csp "Microsoft Base Smart Card Crypto Provider" /n "David Ashley" /t http://time.certum.pl/ /fd sha256 /v emts_ifsfscan.exe
+% 
+% The following certificates were considered:
+%     Issued to: David Ashley
+%     Issued by: Certum Code Signing 2021 CA
+%     Expires:   Sat Aug 16 01:46:38 2025
+%     SHA1 hash: D5F54EEBC165FE82202C2DB9B633D4885B12E5C5
+% 
+%     Issued to: c1e26399-5bee-45e3-9c33-e51655695ace
+%     Issued by: c1e26399-5bee-45e3-9c33-e51655695ace
+%     Expires:   Thu Mar 20 11:14:56 2025
+%     SHA1 hash: 4DECD3C81B96AEB6C226C5126E4DE999506A953D
+% 
+%     Issued to: 1418c40a-aa3e-4259-a258-2d929d1b383b
+%     Issued by: 1418c40a-aa3e-4259-a258-2d929d1b383b
+%     Expires:   Thu Jan 16 10:55:18 2025
+%     SHA1 hash: 3B3A4254A5CDAE9F4A975C272259064854624C9F
+% 
+%     Issued to: a3665860-c4e0-4b3e-adc5-ffe3bfd8721a
+%     Issued by: MS-Organization-Access
+%     Expires:   Mon Jan 07 18:55:40 2030
+%     SHA1 hash: 17784374B18C0EB9EB0346442EC21B4984D6225A
+% 
+% After EKU filter, 3 certs were left.
+% After expiry filter, 3 certs were left.
+% After Subject Name filter, 1 certs were left.
+% The following certificate was selected:
+%     Issued to: David Ashley
+%     Issued by: Certum Code Signing 2021 CA
+%     Expires:   Sat Aug 16 01:46:38 2025
+%     SHA1 hash: D5F54EEBC165FE82202C2DB9B633D4885B12E5C5
+% 
+% SignTool Error: An unexpected internal error has occurred.
+% Error information: "Could not associate private key with certificate." (-2147024891/0x80070005)
+% 
+% Step #10
+% --------
+% Decided to try the -repairstore option.
+%
+% C:\Users\dashl\Documents>certutil -repairstore
+% Expected at least 2 args, received 0
+% CertUtil: Missing argument
+% 
+% Usage:
+%   CertUtil [Options] -repairstore CertificateStoreName CertIdList [PropertyInfFile | SDDLSecurityDescriptor]
+%   Repair key association or update certificate properties or key security descriptor
+%     CertificateStoreName -- Certificate store name.  See -store.
+%     CertIdList -- comma separated list of Certificate or CRL match tokens.
+%             See -store's CertId description.
+%     PropertyInfFile -- INF file containing external properties:
+%             [Properties]
+%             19 = Empty ; Add archived property, OR:
+%             19 =       ; Remove archived property
+% 
+%             11 = "{text}Friendly Name" ; Add friendly name property
+% 
+%             127 = "{hex}" ; Add custom hexadecimal property
+%               _continue_ = "00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f"
+%               _continue_ = "10 11 12 13 14 15 16 17 18 19 1a 1b 1c 1d 1e 1f"
+% 
+%             2 = "{text}" ; Add Key Provider Information property
+%               _continue_ = "Container=Container Name&"
+%               _continue_ = "Provider=Microsoft Strong Cryptographic Provider&"
+%               _continue_ = "ProviderType=1&"
+%               _continue_ = "Flags=0&"
+%               _continue_ = "KeySpec=2"
+% 
+%             9 = "{text}" ; Add Enhanced Key Usage property
+%               _continue_ = "1.3.6.1.5.5.7.3.2,"
+%               _continue_ = "1.3.6.1.5.5.7.3.1,"
+% 
+% Options:
+%   -f                -- Force overwrite
+%   -Enterprise       -- (-ent) Use local machine Enterprise registry certificate store
+%   -user             -- Use HKEY_CURRENT_USER keys or certificate store
+%   -GroupPolicy      -- (-gp) Use Group Policy certificate store
+%   -Unicode          -- Write redirected output in Unicode
+%   -gmt              -- Display times as GMT
+%   -seconds          -- Display times with seconds and milliseconds
+%   -Silent           -- (-q) Use silent flag to acquire crypt context
+%   -split            -- Split embedded ASN.1 elements, and save to files
+%   -v                -- Verbose operation
+%   -privatekey       -- Display password and private key data
+%   -pin PIN                  -- Smart Card PIN
+%   -csp Provider             -- Provider
+%         KSP -- "Microsoft Software Key Storage Provider"
+%         TPM -- "Microsoft Platform Crypto Provider"
+%         NGC -- "Microsoft Passport Key Storage Provider"
+%         SC -- "Microsoft Smart Card Key Storage Provider"
+%   -sid WELL_KNOWN_SID_TYPE  -- Numeric SID
+%             22 -- Local System
+%             23 -- Local Service
+%             24 -- Network Service
+% 
+% CertUtil -?              -- Display a verb list (command list)
+% CertUtil -repairstore -? -- Display help text for the "repairstore" verb
+% CertUtil -v -?           -- Display all help text for all verbs
+% 
+%
+% Step #11
+% --------
+% Installing the sub-certificates as trusted root certification authorities in the certificate store cured my problems.  I downloaded
+% these certificates (3 of them) listed as sub-certificates with my certificate on the Certum website.  I used the second
+% export form available, and these imported no problem.
+%
+% It ends up that the "Could not associate private key with certificate." message from signtool was quite misleading.
+%
+% Step #12
+% --------
+% For reasons I don't understand, the computer now claimed that 26100 was an imcompatible version.
+%
+% Used the previous version and the form of the command recommended in the Certum instructions, and it worked
+% fine.
+%
+% C:\Users\dashl\Documents>"c:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x64\signtool.exe" sign /debug /n "David Ashley" /t http://time.certum.pl/ /fd sha256 /v emts_ifsfscan.exe
+% 
+% The following certificates were considered:
+%     Issued to: David Ashley
+%     Issued by: Certum Code Signing 2021 CA
+%     Expires:   Sat Aug 16 01:46:38 2025
+%     SHA1 hash: D5F54EEBC165FE82202C2DB9B633D4885B12E5C5
+% 
+%     Issued to: c1e26399-5bee-45e3-9c33-e51655695ace
+%     Issued by: c1e26399-5bee-45e3-9c33-e51655695ace
+%     Expires:   Thu Mar 20 11:14:56 2025
+%     SHA1 hash: 4DECD3C81B96AEB6C226C5126E4DE999506A953D
+% 
+%     Issued to: 1418c40a-aa3e-4259-a258-2d929d1b383b
+%     Issued by: 1418c40a-aa3e-4259-a258-2d929d1b383b
+%     Expires:   Thu Jan 16 10:55:18 2025
+%     SHA1 hash: 3B3A4254A5CDAE9F4A975C272259064854624C9F
+% 
+%     Issued to: a3665860-c4e0-4b3e-adc5-ffe3bfd8721a
+%     Issued by: MS-Organization-Access
+%     Expires:   Mon Jan 07 18:55:40 2030
+%     SHA1 hash: 17784374B18C0EB9EB0346442EC21B4984D6225A
+% 
+% After EKU filter, 3 certs were left.
+% After expiry filter, 3 certs were left.
+% After Subject Name filter, 1 certs were left.
+% After Private Key filter, 1 certs were left.
+% The following certificate was selected:
+%     Issued to: David Ashley
+%     Issued by: Certum Code Signing 2021 CA
+%     Expires:   Sat Aug 16 01:46:38 2025
+%     SHA1 hash: D5F54EEBC165FE82202C2DB9B633D4885B12E5C5
+% 
+% Done Adding Additional Store
+% Successfully signed: emts_ifsfscan.exe
+% 
+% Number of files successfully Signed: 1
+% Number of warnings: 0
+% Number of errors: 0
+%
+% Step #13
+% --------
+% Determined that my e-mail address was not in the "properties" of the signature in the .EXE, so have
+% written Certum technical support on 8/16 to see if I need to have the certificate reissued, or how
+% I would get my e-mail address in there.
+% 
+%End of file c_psc0.tex
+
+
+
+
+
+
 ## Licensing
 
 _Emts_ is provided under _The Unlicense_ (full text below).  The license places
