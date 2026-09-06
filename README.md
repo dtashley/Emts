@@ -4,16 +4,32 @@
 - [License](*license)
   - [The Unlicense](#theunlicense)
   - [License Clarifications](#licenseclarifications)
+- [Glossary of Notation](#glossaryofnotation)
+- [Glossary of Terms](#glossaryofterms)
+- [References](#references)  
 
 ## Overview
 
 *EMTS* (*Em*bedded System *T*ool*s*et Base)
 is a set of software source files (and related files and
-information) used to assist in the construction
-of PC and server tools useful for embedded system
+information) provided to assist in the construction
+of PC and server tools useful in embedded system
 engineering.
 
-The tools that can be produced are:
+An *EMTS* project consists of:
+
+* The *EMTS Core*, which has to be included in all
+  projects.
+* *EMTS Modules* (a *module* is defined later), which
+  may or may not be included in a project.
+* *Application Modules*, which are written by the
+  user of the *EMTS* framework.
+
+*EMTS* might also be described as a tool integration framework.
+It provides the capability to integrate user tools
+with each other and with built-in *EMTS* functionality.
+
+The tools that can be produced using *EMTS* are:
 
 * A command-line tool for *Windows*.
 * A command-line tool for _*nix_.
@@ -27,15 +43,15 @@ The tools that can be produced are:
   C / C++ / assembly-language library, ,distributed in source code
   form
 
-The general process of building an EMTS project involves these
-steps:
+The general process of building an EMTS project involves:
 
-* Check out and arrange *EMTS*, *LibGen*, *LibNum*, and project-specific
-  files in a recommended directory arrangement.
-* Incorporate the necessary source files into the project being built.
-* Set up preprocessor directives so that *EMTS*, *LibGen*, and *LibNum* build
-  as intended.
-* Build the project.
+* Checking out and arranging *EMTS*, *LibGen*, *LibNum*, and application
+  source files in a recommended directory arrangement.
+* Incorporating the necessary source files into the project (i.e. *Visual
+  Studio* project, makefile, etc.) being built.
+* Setting up preprocessor directives so that *EMTS*, *LibGen*,
+  and *LibNum* compile as intended.
+* Building the project and using the executable.
 
 *EMTS*, *LibGen*, and *LibNum* are all provided under _The Unlicense_,
 so there are no restrictions on their use, no obligation to make
@@ -44,7 +60,8 @@ a program incorporates open-source software.
 
 ## License
 
-TBD.
+*EMTS* is provided under *The Unlicense* (text below).  I've also
+provided license clarifications, also below.
 
 ### The Unlicense
 
@@ -54,300 +71,6 @@ TBD.
 
 TBD.
 
-
-*Emts* (*Em*bedded System *T*ool*s*et Base)
-is a set of software source files (and related files and
-information) used to assist in the construction
-of PC and server tools.
-
-
-This manual describes \emph{\productname{}}, a tool integration
-framework designed for embedded software development work.
-
-\emph{\productname{}} provides the ability to package C/C++ tools
-in several distinct forms, using the same underlying source code:
-
-\begin{itemize}
-      \item As commands available from an interactive shell, provided
-            by the tool.
-      \item As a console-mode program (no scripting or graphical functionality).
-      \item As functions in a custom scripting language interpreter.
-            (The scripting language is tentatively
-            named \emph{\scriptinglanguagenamemc{}}).
-      \item As functionality utilized from a \emph{Windows} GUI interface.
-\end{itemize}
-
-
-
-Although \emph{\productname{}} can be built for both \emph{Windows} and
-\emph{Unix}, graphical capability is available only for \emph{Windows}.
-
-\emph{\productname{}} is best described as a tool integration framework
-because it is possible to integrate custom tools (most commonly,
-proprietary corporate tools) into the framework and create proprietary or
-custom tools that are a mixture of \emph{\productname{}} functionality
-and proprietary or custom functionality.
-
-My e-mail address is \emph{dashley@gmail.com}.\@ Please feel
-to contact me.
-\\\\
-\noindent\hspace*{2.5in}Dave Ashley\\
-\noindent\hspace*{2.5in}Allen Park, Michigan, USA\\
-\noindent\hspace*{2.5in}August, 2024
-
-
-
-\chapter*{Glossary Of Terms}
-\markboth{GLOSSARY OF TERMS}{GLOSSARY OF TERMS}
-
-\label{cglo2}
-
-\begin{vworktermglossaryenum}
-
-\item \textbf{cardinality}\index{cardinality}
-
-      The cardinality of a set is the
-      number of elements in the set.  In this work, the cardinality
-      of a set is denoted $n()$.  For example, 
-      $n(\{12,29,327\}) = 3$.
-
-\end{vworktermglossaryenum}
-
-%End of file c_glo2.tex
-
-
-\chapter*{Glossary Of Mathematical And Other Notation}
-\markboth{GLOSSARY OF MATHEMATICAL NOTATION}{GLOSSARY OF MATHEMATICAL NOTATION}
-
-\label{cglo3}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section*{General Notation}
-
-\begin{vworkmathtermglossaryenum}
-
-\item \mbox{\boldmath $ \vworkdivides $}
-
-
-      $a \vworkdivides b$, 
-      \index{divides@divides ($\vworkdivides$)}
-      \index{--@$\vworkdivides$ (divides)}
-      read ``\emph{$a$ divides $b$}'', denotes that $b/a$ has no remainder.
-      Equivalently, it may be stated that
-      $(a \vworkdivides b) \Rightarrow (\exists c \in \vworkintset{}, b = ac)$.
-
-\item \mbox{\boldmath $ \vworknotdivides $}
-
-      $a \vworknotdivides b$, 
-      \index{divides@divides ($\vworkdivides$)}
-      \index{--@$\vworknotdivides$ (doesn't divide)}
-      read ``\emph{$a$ does not divide $b$}'', denotes that $b/a$ has a reminder.
-      Equivalently, it may be stated that
-      $(a \vworknotdivides b) \Rightarrow (\nexists c \in \vworkintset{}, b = ac)$.
-
-\item \mbox{\boldmath $ \lfloor \cdot \rfloor $}
-
-      Used
-      \index{floor function@floor function ($\lfloor\cdot\rfloor$)}
-      \index{--@$\lfloor\cdot\rfloor$ (\emph{floor($\cdot$)} function)}
-      to denote the \emph{floor($\cdot$)} function.  The
-      \emph{floor($\cdot$)}
-      function is the largest integer not larger than the
-      argument.
-
-\item \mbox{\boldmath $\lceil \cdot \rceil$ }
-
-      Used
-      \index{ceiling function@ceiling function ($\lceil\cdot\rceil$)}
-      \index{--@$\lceil\cdot\rceil$ (\emph{ceiling($\cdot$)} function)}
-      to denote the \emph{ceiling($\cdot$)} function.
-      The \emph{ceiling($\cdot$)} function
-      is the smallest integer not smaller than the
-      argument.
-\end{vworkmathtermglossaryenum}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section*{Usage Of English And Greek Letters}
-
-\begin{vworkmathtermglossaryenum}
-
-\item \mbox {\boldmath $a/b$}
-
-      An arbitrary \index{rational number}rational number.
-
-\item \mbox {\boldmath $ F_N $}
-
-      The \index{Farey series}Farey 
-      series of order $N$.  The Farey series is the
-      ordered set of irreducible rational numbers 
-	  in [0,1] with a
-      denominator not larger than $N$.
-
-\item \mbox {\boldmath $F_{k_{MAX}, \overline{h_{MAX}}}$}
-      
-	  \index{FKMAXHMAX@$F_{k_{MAX}, \overline{h_{MAX}}}$}
-	  The ordered set of irreducible rational numbers
-	  $h/k$ subject to the constraints $0 \leq h \leq h_{MAX}$
-	  and $1 \leq k \leq h_{MAX}$.  
-	  (See Section \ref{cfry0:schk0}.)
-
-
-\item \mbox{\boldmath $H/K$}, \mbox{\boldmath $h/k$},
-      \mbox{\boldmath $h'/k'$}, \mbox{\boldmath $h''/k''$},
-      \mbox{\boldmath $h_i/k_i$}
-
-      Terms in a Farey series of order $N$.
-
-\item \mbox{\boldmath $r_A$}
-
-      The rational number $h/k$ used to approximate
-      an arbitrary real number $r_I$.
-
-\item \mbox{\boldmath $r_I$}
-
-      The real number, which may or may not be rational,
-      which is to be approximated by a rational number
-      $r_A = h/k$.
-
-\item \textbf{reduced}
-
-      See \emph{irreducible}.
-
-\item \mbox{\boldmath $s_k = p_k/q_k$}
-
-      The $k$th convergent of a continued fraction.
-
-\item \mbox{\boldmath $x_{MAX}$}
-
-      The largest element of the domain for which the
-      behavior of an approximation must be guaranteed.
-      In this paper, most derivations assume
-      that $x \in [0, x_{MAX}]$, $x_{MAX} \in \vworkintsetpos{}$.
-\end{vworkmathtermglossaryenum}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section*{Bitfields And Portions Of Integers}
-
-\begin{vworkmathtermglossaryenum}
-\item \mbox{\boldmath $a_{b}$}
-
-      The $b$th bit of the integer $a$.  Bits are numbered with the
-      least significant bit ``0'', and consecutively through 
-      ``$n-1$'', where $n$ is the total number of bits.
-
-      In general, if $p$ is an $n$-bit unsigned integer,
-
-      \begin{equation}
-      \nonumber p = \sum_{i=0}^{n-1} 2^i p_i .
-      \end{equation}
-
-\item \mbox{\boldmath $a_{c:b}$}
-
-      The integer consisting of the $b$th through the
-      $c$th bits of the integer $a$.  Bits are numbered with the
-      least significant bit ``0'', and consecutively through 
-      ``$n-1$'', where $n$ is the total number of bits.
-
-      For example, if $p$ is a 24-bit unsigned integer, then
-
-      \begin{equation}
-      \nonumber p = 2^{16}p_{23:16} + 2^{8}p_{15:8} + p_{7:0} .
-      \end{equation}
-
-\item \mbox{\boldmath $a_{[b]}$}
-
-      The $b$th word of the integer $a$.  Words are numbered 
-      with the
-      least significant word ``0'', and consecutively through 
-      ``$n-1$'', where $n$ is the total number of words.
-
-      In general, if $p$ is an $n$-word unsigned integer 
-      and $z$ is the wordsize in bits,
-
-      \begin{equation}
-      \nonumber p = \sum_{i=0}^{n-1} 2^{iz} p_i .
-      \end{equation}
-
-\item \mbox{\boldmath $a_{[c:b]}$}
-
-      The integer consisting of the $b$th through the
-      $c$th word of the integer $a$.  Words are numbered with the
-      least significant word ``0'', and consecutively through 
-      ``$n-1$'', where $n$ is the total number of words.
-
-      For example, if $p$ is a 24-word unsigned integer and
-      $z$ is the wordsize in bits, then
-
-      \begin{equation}
-      \nonumber p = 2^{16z}p_{[23:16]} + 2^{8z}p_{[15:8]} + p_{[7:0]} .
-      \end{equation}
-
-\end{vworkmathtermglossaryenum}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section*{Matrices And Vectors}
-
-\begin{vworkmathtermglossaryenum}
-
-\item \mbox{\boldmath $0$}
-
-      $\mathbf{0}$ (in bold face) is used to denote either a vector or matrix
-      populated with all zeroes.  Optionally, in cases where the context is not clear
-      or where there is cause to highlight the dimension, $\mathbf{0}$ may be subscripted
-      to indicate the dimension, i.e. 
-      
-      \begin{equation}
-      \nonumber
-      \mathbf{0}_3 = \left[\begin{array}{c} 0 \\ 0 \\ 0 \end{array}\right]
-      \end{equation}
-
-      \begin{equation}
-      \nonumber
-      \mathbf{0}_{3 \times 2} = \left[\begin{array}{cc} 0&0 \\ 0&0 \\ 0&0 \end{array}\right]
-      \end{equation}
-
-\item \mbox{\boldmath $I$}
-
-      $I$ is used to denote the square identity matrix (the matrix with all
-      elements 0 except elements on the diagonal which are 1).
-      Optionally, in cases where the context is not clear
-      or where there is cause to highlight the dimension, $I$ may be subscripted
-      to indicate the dimension, i.e. 
-      
-      \begin{equation}
-      \nonumber
-      I = I_3 = I_{3 \times 3} = \left[\begin{array}{ccc} 1&0&0 \\ 0&1&0 \\ 0&0&1 \end{array}\right]
-      \end{equation}
-
-\end{vworkmathtermglossaryenum}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section*{Sets And Set Notation}
-
-\begin{vworkmathtermglossaryenum}
-
-\item \mbox{\boldmath $n(A)$}
-
-      The \index{cardinality}cardinality of set $A$.  (The cardinality of a set is the
-      number of elements in the set.)
-
-\end{vworkmathtermglossaryenum}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1391,5 +1114,37 @@ the instructions it appears that I don't do this.
 Could not find earlier notes anywhere, so it appears
 I will have to re-document how to use the card,
 or search more for my earlier notes.
+
+## Glossary of Notation
+
+### Bitfields and Portions of Integers
+
+| Notation  | Description |
+| ------------- | ------------- |
+| $a_{b}$  | The $b$ th bit of the integer $a$.  Bits are numbered with the least significant bit 0, and consecutively through $n-1$, where $n$ is the total number of bits.<br><br>In general, if $p$ is an $n$-bit unsigned integer,<br><br>$$p = \sum_{i=0}^{n-1} 2^i p_i $$.|
+| $a_{c:b}$  | The integer consisting of the $b$ th through the $c$ th bits of the integer $a$.  Bits are numbered with the least significant bit 0, and consecutively through $n-1$, where $n$ is the total number of bits.<br><br>For example, if $p$ is a 24-bit unsigned integer, then $$p = 2^{16}p_{23:16} + 2^{8}p_{15:8} + p_{7:0}$$. |
+| $a_{[b]}$ | The $b$ th word of the integer $a$. Words are numbered with the least significant word 0, and consecutively through $n-1$, where $n$ is the total number of words.<br><br>In general, if $p$ is an $n$-word unsigned integer and $z$ is the wordsize in bits, $$p = \sum_{i=0}^{n-1} 2^{iz} p_i$$. |
+| $a_{[c:b]}$ | The integer consisting of the $b$ th through the $c$ th word of the integer $a$.  Words are numbered with the least significant word 0, and consecutively through $n-1$, where $n$ is the total number of words.<br><br>For example, if $p$ is a 24-word unsigned integer and $z$ is the wordsize in bits, then $$p = 2^{16z}p_{[23:16]} + 2^{8z}p_{[15:8]} + p_{[7:0]}$$. |
+
+### Matrices And Vectors
+
+| Notation  | Description |
+| ------------- | ------------- |
+| $\mathbf{0}$ (in bold face)  | A vector or matrix populated with all zeroes. Optionally, in cases where the context is not clear or where there is cause to highlight the dimension, $\mathbf{0}$ may be subscripted to indicate the dimension, i.e. $$\mathbf{0}_3 = \left[\begin{array}{c} 0 \\ 0 \\ 0 \end{array}\right]$$ $$\mathbf{0}_{3 \times 2} = \left[\begin{array}{cc} 0&0 \\ 0&0 \\ 0&0 \end{array}\right]$$. |
+| $\mathbf{I}$  | The square identity matrix (the matrix with all elements 0 except elements on the diagonal which are 1). Optionally, in cases where the context is not clear or where there is cause to highlight the dimension, $I$ may be subscripted      to indicate the dimension, i.e. $$I = I_3 = I_{3 \times 3} = \left[\begin{array}{ccc} 1&0&0 \\ 0&1&0 \\ 0&0&1 \end{array}\right]$$ |
+
+### Sets And Set Notation
+
+| Notation  | Description |
+| ------------- | ------------- |
+| $n(A)$  | The cardinality of a set $A$. (Cardinality is the number of elements in a set.)  For example, $$n(\{12, 29, 327\}) = 3$$. |
+
+## Glossary of Terms
+
+TBD.
+
+## References
+
+TBD.
 
 <!-- End of file README.md -->
