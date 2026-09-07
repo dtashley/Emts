@@ -1119,34 +1119,97 @@ or search more for my earlier notes.
 
 ### Bitfields and Portions of Integers
 
-| Notation  | Description |
-| ------------- | ------------- |
-| $a_{b}$  | The $b$ th bit of the integer $a$.  Bits are numbered with the least significant bit 0, and consecutively through $n-1$, where $n$ is the total number of bits.<br><br>In general, if $p$ is an $n$-bit unsigned integer,<br><br>
+#### $a_{b}$
+
+The $b$ th bit of the integer $a$.  Bits are numbered with the
+least significant bit 0, and consecutively through $n-1$, where $n$ is
+the total number of bits.
+
+In general, if $p$ is an $n$-bit
+unsigned integer,
+
 $$
-p = \sum_{i=0}^{n-1} 2^i p_i
-$$.|
-| $a_{c:b}$  | The integer consisting of the $b$ th through the $c$ th bits of the integer $a$.  Bits are numbered with the least significant bit 0, and consecutively through $n-1$, where $n$ is the total number of bits.<br><br>For example, if $p$ is a 24-bit unsigned integer, then $$p = 2^{16}p_{23:16} + 2^{8}p_{15:8} + p_{7:0}$$. |
-| $a_{[b]}$ | The $b$ th word of the integer $a$. Words are numbered with the least significant word 0, and consecutively through $n-1$, where $n$ is the total number of words.<br><br>In general, if $p$ is an $n$-word unsigned integer and $z$ is the wordsize in bits, $$p = \sum_{i=0}^{n-1} 2^{iz} p_i$$. |
-| $a_{[c:b]}$ | The integer consisting of the $b$ th through the $c$ th word of the integer $a$.  Words are numbered with the least significant word 0, and consecutively through $n-1$, where $n$ is the total number of words.<br><br>For example, if $p$ is a 24-word unsigned integer and $z$ is the wordsize in bits, then $$p = 2^{16z}p_{[23:16]} + 2^{8z}p_{[15:8]} + p_{[7:0]}$$. |
+p=\sum_{i=0}^{n-1}2^ip_i.
+$$
+
+#### $a_{c:b}$
+
+The integer consisting of the $b$ th through the $c$ th
+bits of the integer $a$.  Bits are numbered with the least
+significant bit 0, and consecutively through $n-1$, where
+$n$ is the total number of bits.
+
+For example, if $p$ is a 24-bit unsigned integer, then
+
+$$
+p = 2^{16}p_{23:16} + 2^{8}p_{15:8} + p_{7:0}.
+$$
+
+#### $a_{[b]}$
+
+The $b$ th word of the integer $a$. Words are numbered
+with the least significant word 0, and consecutively through
+$n-1$, where $n$ is the total number of words.
+
+In general, if $p$ is an $n$-word unsigned integer and $z$ is the wordsize in bits,
+
+$$p = \sum_{i=0}^{n-1} 2^{iz} p_i.
+$$
+
+#### $a_{[c:b]}$
+
+The integer consisting of the $b$ th through the $c$ th
+word of the integer $a$.  Words are numbered with
+the least significant word 0, and consecutively
+through $n-1$, where $n$ is the total number of words.
+
+For example, if $p$ is a 24-word unsigned integer and 
+$z$ is the wordsize in bits, then
+
+$$
+p = 2^{16z}p_{[23:16]} + 2^{8z}p_{[15:8]} + p_{[7:0]}.
+$$
+
 
 ### Matrices And Vectors
 
-| Notation  | Description |
-| ------------- | ------------- |
-| $\mathbf{0}$ (in bold face)  | A vector or matrix populated with all zeroes. Optionally, in cases where the context is not clear or where there is cause to highlight the dimension, $\mathbf{0}$ may be subscripted to indicate the dimension, i.e.
+#### $0$ (in bold face)
+
+A vector or matrix populated with all zeroes. Optionally,
+in cases where the context is not clear or where there is
+cause to highlight the dimension,
+$0$ may be subscripted to indicate the dimension, i.e.
+
 $$
-\mathbf{0}_3 = \left[\begin{array}{c} 0 \\ 0 \\ 0 \end{array}\right]$$ $$\mathbf{0}_{3 \times 2} = \left[\begin{array}{cc} 0&0 \\ 0&0 \\ 0&0 \end{array}\right]$$. |
-| $\mathbf{I}$  | The square identity matrix (the matrix with all elements 0 except elements on the diagonal which are 1). Optionally, in cases where the context is not clear or where there is cause to highlight the dimension, $I$ may be subscripted      to indicate the dimension, i.e. $$I = I_3 = I_{3 \times 3} = \left[\begin{array}{ccc} 1&0&0 \\ 0&1&0 \\ 0&0&1 \end{array}\right]
-$$ |
+0_3=\left[\begin{array}{c}0\\\\ 0\\\\ 0\end{array}\right]
+$$
+
+$$
+0_3=\left[\begin{array}{c} 0 \\ 0 \\ 0 \end{array}\right]0_{3 \times 2} = \left[\begin{array}{cc} 0&0 \\ 0&0 \\ 0&0 \end{array}\right]
+$$
+
+#### $I$
+
+The square identity matrix (the matrix with all elements
+0 except elements on the diagonal which are 1).
+Optionally, in cases where the context is not clear
+or where there is cause to highlight the dimension,
+$I$ may be subscripted to indicate the dimension, i.e.
+
+$$
+I=I_3=I_{3\times{}3}=\left[\begin{array}{ccc}1&0&0\\0&1&0\\0&0&1\end{array}\right]
+$$
 
 ### Sets And Set Notation
 
-| Notation  | Description |
-| ------------- | ------------- |
-| $n(A)$  | The cardinality of a set $A$. (Cardinality is the number of elements in a set.)  For example,
+#### $n(A)$
+
+The cardinality of a set $A$. (Cardinality is the
+number of elements in a set.)  For example,
+
 $$
-n(\{12, 29, 327\}) = 3
-$$.|
+n(\{12,29,327\})=3.
+$$
 
 ## Glossary of Terms
 
