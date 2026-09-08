@@ -1200,7 +1200,7 @@ or where there is cause to highlight the dimension,
 $I$ may be subscripted to indicate the dimension, i.e.
 
 $$
-I=I_3=I_{3\times{}3}=\left[\begin{array}{ccc}1&0&0\\0&1&0\\0&0&1\end{array}\right]
+I=I_3=I_{3\times{}3}=\left[\begin{array}{ccc}1&0&0\\\\ 0&1&0\\\\ 0&0&1\end{array}\right]
 $$
 
 ### Sets And Set Notation
@@ -1211,7 +1211,7 @@ The cardinality of a set $A$. (Cardinality is the
 number of elements in a set.)  For example,
 
 $$
-n(\{12,29,327\})=3.
+n(\\{12,29,327\\})=3.
 $$
 
 ## Glossary of Terms
