@@ -1191,7 +1191,7 @@ $$
 0_{3 \times 2} = \left[\begin{array}{cc} 0&0\\\\ 0&0\\\\ 0&0 \end{array}\right]
 $$
 
-#### $I$
+#### $\mathbf{I}$
 
 The square identity matrix (the matrix with all elements
 0 except elements on the diagonal which are 1).
