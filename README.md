@@ -1172,7 +1172,7 @@ $$
 
 ### Matrices And Vectors
 
-#### $0$ (in bold face)
+#### $\mathbf{0}$ (in bold face)
 
 A vector or matrix populated with all zeroes. Optionally,
 in cases where the context is not clear or where there is
