@@ -72,65 +72,6 @@ TBD.
 TBD.
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section*{Sets Of Numbers}
-
-\begin{vworkmathtermglossaryenum}
-
-\item \mbox{\boldmath $\vworkintsetpos$}
-
-      The 
-      \index{natural number}
-      \index{N@$\vworkintsetpos$}
-      set of positive integers (natural numbers).
-
-\item \mbox{\boldmath $\vworkratset$}
-
-      The 
-      \index{rational number}
-      \index{Q@$\vworkratset$}
-      set of rational numbers.
-
-\item \mbox{\boldmath $\vworkratsetnonneg$}
-
-      The 
-      \index{rational number}
-      \index{Q+@$\vworkratsetnonneg$}
-      set of non-negative rational numbers.
-
-\item \mbox{\boldmath $\vworkrealset$}
-
-      The 
-      \index{real number}
-      \index{R@$\vworkrealset$}
-      set of real numbers.
-
-\item \mbox{\boldmath $\vworkrealsetnonneg$}
-
-      The 
-      \index{real number}
-      \index{R+@$\vworkrealsetnonneg$}
-      set of non-negative real numbers.
-
-\item \mbox{\boldmath $\vworkintset$}
-
-      The 
-      \index{integer}
-      \index{Z@$\vworkintset$}
-      set of integers.
-
-\item \mbox{\boldmath $\vworkintsetnonneg$}
-
-      The 
-      \index{integer}
-      \index{Z+@$\vworkintsetnonneg$}
-      set of non-negative integers.
-
-\end{vworkmathtermglossaryenum}
-
 %End of file c_glo3.tex
 
 \chapter{\cinttwotitle{}}
@@ -1213,6 +1154,42 @@ number of elements in a set.)  For example,
 $$
 n(\\{12,29,327\\})=3.
 $$
+
+### Sets of Numbers
+
+#### $\mathbb{N}^+$
+
+The set of positive integers (natural numbers),
+$\\{1, 2, 3, \ldots{}\\}$.
+
+#### $\mathbb{N}$
+
+The set of non-negative integers,
+$\\{0, 1, 2, 3, \ldots{}\\}$.
+
+#### $\mathbb{Q}$
+
+The set of rational numbers.
+
+#### $\mathbb{Q^+}$
+
+The set of non-negative rational numbers.
+
+#### $\mathbb{R}$
+
+The set of real numbers.
+
+#### $\mathbb{R^+}$
+
+The set of non-negative real numbers.
+
+#### $\mathbb{Z}$
+
+The set of integers.
+
+#### $\mathbb{Z^+}$
+
+The set of non-negative integers.
 
 ## Glossary of Terms
 
