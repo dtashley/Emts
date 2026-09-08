@@ -1170,7 +1170,6 @@ $$
 p = 2^{16z}p_{[23:16]} + 2^{8z}p_{[15:8]} + p_{[7:0]}.
 $$
 
-
 ### Matrices And Vectors
 
 #### $0$ (in bold face)
@@ -1185,7 +1184,11 @@ $$
 $$
 
 $$
-0_3=\left[\begin{array}{c} 0 \\ 0 \\ 0 \end{array}\right]0_{3 \times 2} = \left[\begin{array}{cc} 0&0 \\ 0&0 \\ 0&0 \end{array}\right]
+0_3=\left[\begin{array}{c}0\\\\ 0\\\\ 0\end{array}\right]
+$$
+
+$$
+0_{3 \times 2} = \left[\begin{array}{cc} 0&0\\\\ 0&0\\\\ 0&0 \end{array}\right]
 $$
 
 #### $I$
