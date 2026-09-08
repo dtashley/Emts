@@ -2,10 +2,11 @@
 
 - [Overview](#overview)
 - [License](*license)
-  - [The Unlicense](#theunlicense)
-  - [License Clarifications](#licenseclarifications)
-- [Glossary of Notation](#glossaryofnotation)
-- [Glossary of Terms](#glossaryofterms)
+  - [The Unlicense](#the-unlicense)
+  - [License Clarifications](#license-clarifications)
+- [Modules, Tools, and Commands](#modules-tools-and-commands)
+- [Glossary of Notation](#glossary-of-notation)
+- [Glossary of Terms](#glossary-of-terms)
 - [References](#references)  
 
 ## Overview
@@ -71,51 +72,9 @@ TBD.
 
 TBD.
 
+## Modules, Tools, and Commands
 
-%End of file c_glo3.tex
-
-\chapter{\cinttwotitle{}}
-
-\label{cint2}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Overview of This Manual}
-\label{cint2:siov0}
-
-This manual describes \emph{\productname{}}, a customizable tool integration
-framework.
-
-\emph{\productname{}} is a customizable tool integration framework:
-\begin{itemize}
-      \item It allows the same tools, built from the same source code,
-            to be used in a consistent way in the following forms:
-            \begin{itemize}
-                  \item Standalone console-mode programs.
-                  \item As built-in functions in a scripting language, \emph{CLIKE}.
-                  \item As programs with a GUI interface.
-            \end{itemize}
-      \item It provides a base product with substantial functionality that can be
-            customized and extended through:
-            \begin{itemize}
-                \item The addition of functionality packaged as standalone conole-mode programs,
-                      built-in functions in a scripting langauge, and panels in GUI
-                      program.
-                \item Customized opening graphics.
-                \item Customized help and contact information.
-          \end{itemize}
-\end{itemize}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Overview of \productname{}}
-\label{cint2:siov1}
-
-\emph{\productname{}} contains a core, called the \emph{core}
+*EMTS*  contains a core, called the \emph{core}
 or the \emph{\productname{} core},
 that is not designed to be divided.  Any proprietary or custom tool built
 using \emph{\productname{}} would contain the entire core, combined
